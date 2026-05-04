@@ -78,7 +78,7 @@ struct WhosComing: View {
                     
                    
                     if appState.state.goOut {
-                        NavigationLink(destination: Where()) {
+                        NavigationLink(destination: Where(appState: appState)) {
                             nextButton
                         }
                     } else {

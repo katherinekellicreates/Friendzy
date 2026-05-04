@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum Season: String {
+    case winter
+    case spring
+    case summer
+    case fall
+}
+
 enum LocationRequirement {
     case indoor
     case outdoor
@@ -39,6 +46,9 @@ struct Activity {
     let energyLevel: EnergyLevel
     let priceLevel: PriceLevel
     let requiresFocus: Bool
+    
+    let seasons: [Season]
+    
 }
 
 struct ActivityData {
@@ -58,7 +68,8 @@ struct ActivityData {
             types: ["Entertainment", "Food & Drinks", "Chill"],
             energyLevel: .lowest,
             priceLevel: .free,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -70,7 +81,8 @@ struct ActivityData {
             types: ["Social", "Food & Drinks","Chill"],
             energyLevel: .low,
             priceLevel: .free,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -82,7 +94,8 @@ struct ActivityData {
             types: ["Social", "Food & Drinks","Chill"],
             energyLevel: .low,
             priceLevel: .free,
-            requiresFocus: true
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -94,7 +107,8 @@ struct ActivityData {
             types: ["Gaming","Entertainment","Fun","Social"],
             energyLevel: .lowest,
             priceLevel: .free,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -106,7 +120,8 @@ struct ActivityData {
             types: ["Gaming","Entertainment","Fun","Social"],
             energyLevel: .lowest,
             priceLevel: .free,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -118,7 +133,8 @@ struct ActivityData {
             types: ["Gaming","Entertainment","Fun","Social"],
             energyLevel: .low,
             priceLevel: .low,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -130,7 +146,8 @@ struct ActivityData {
             types: ["Creativity","Food & Drinks","Fun","Social"],
             energyLevel: .low,
             priceLevel: .low,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
             
             ),
         //////////////////////////////////////////////////////////////////////////
@@ -149,7 +166,8 @@ struct ActivityData {
             types: ["Sports & Fitness", "Experiences"],
             energyLevel: .high,
             priceLevel: .free,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.spring, .summer, .fall]
         ),
         
         Activity(
@@ -161,7 +179,8 @@ struct ActivityData {
             types: ["Sports & Fitness", "Entertainment"],
             energyLevel: .medium,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.spring, .summer, .fall]
         ),
         
         Activity(
@@ -173,11 +192,12 @@ struct ActivityData {
             types: ["Social", "Experiences","Fun","Food & Drinks"],
             energyLevel: .high,
             priceLevel: .high,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.spring, .summer, .fall]
         ),
         
         Activity(
-            name: "Rollar Skating",
+            name: "Roller Skating",
             minPeople: 2,
             isDate: true,
             locationRequirement: .outdoor,
@@ -185,7 +205,8 @@ struct ActivityData {
             types: ["Social", "Sports & Fitness"],
             energyLevel: .high,
             priceLevel: .high,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -197,7 +218,8 @@ struct ActivityData {
             types: ["Social", "Sports & Fitness"],
             energyLevel: .high,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter]
         ),
         
         Activity(
@@ -209,7 +231,8 @@ struct ActivityData {
             types: ["Social","Fun","Food & Drinks"],
             energyLevel: .medium,
             priceLevel: .free,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.spring, .summer]
         ),
         
         Activity(
@@ -221,7 +244,8 @@ struct ActivityData {
             types: ["Social", "Shopping","Fun"],
             energyLevel: .high,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -233,7 +257,8 @@ struct ActivityData {
             types: ["Study/Productive", "Entertainment"],
             energyLevel: .medium,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         //////////////////////////////////////////////////////////////////////////
         
@@ -249,9 +274,10 @@ struct ActivityData {
             locationRequirement: .flexible,
             goOut: true,
             types: ["Spontaneous", "Fun", "Silly"],
-            energyLevel: .low,
+            energyLevel: .lowest,
             priceLevel: .free,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -263,7 +289,8 @@ struct ActivityData {
             types: ["Creativity", "Fun"],
             energyLevel: .medium,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         //////////////////////////////////////////////////////////////////////////
@@ -282,7 +309,8 @@ struct ActivityData {
             types: ["Sports & Fitness", "Entertainment"],
             energyLevel: .medium,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -292,9 +320,10 @@ struct ActivityData {
             locationRequirement: .indoor,
             goOut: true,
             types: ["Entertainment", "Fun","Food & Drinks"],
-            energyLevel: .medium,
+            energyLevel: .low,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -306,7 +335,8 @@ struct ActivityData {
             types: ["Experiences"],
             energyLevel: .medium,
             priceLevel: .medium,
-            requiresFocus: true
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         Activity(
             name: "Laser tag",
@@ -317,7 +347,8 @@ struct ActivityData {
             types: ["Experiences","Fun"],
             energyLevel: .high,
             priceLevel: .medium,
-            requiresFocus: false
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
         )
     ]
     
@@ -331,6 +362,10 @@ struct ActivityData {
             
             var score = 0
             
+            //season filter
+            if !activity.seasons.contains(state.currentSeason) {
+                continue
+            }
             
             // group size
             if state.number < activity.minPeople {

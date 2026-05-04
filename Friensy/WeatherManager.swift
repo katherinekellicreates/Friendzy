@@ -7,26 +7,14 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
-struct WeatherData: Decodable {
-    let main: Main
-    let weather: [Weather]
-}
-
-struct Main: Decodable {
-    let temp: Double
-}
-
-struct Weather: Decodable {
-    let main: String
-}
-
-@Observable
-class WeatherManager {
-    var temperature: Double = 0
-    var condition: String = ""
+class WeatherManager: ObservableObject {
     
-    func fetchWeather(lat: Double, lon: Double) {
+    @Published var temperature: Double = 0
+    @Published var condition: String = ""
+    
+    func fetchWeather(lat: Double, lon: Double ) {
         let apiKey = "1e5ec02fdf50bc0a2defdb8c6fe7a005"
         
         let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&units=imperial&appid=\(apiKey)"
@@ -35,6 +23,19 @@ class WeatherManager {
         
         URLSession.shared.dataTask(with: url) { data, _, _ in
             guard let data = data else { return }
+            
+            struct WeatherData: Decodable {
+                let main: Main
+                let weather: [Weather]
+            }
+            
+            struct Main: Decodable {
+                let temp: Double
+            }
+            
+            struct Weather: Decodable {
+                let main: String
+            }
             
             if let decoded = try? JSONDecoder().decode(WeatherData.self, from: data) {
                 DispatchQueue.main.async {

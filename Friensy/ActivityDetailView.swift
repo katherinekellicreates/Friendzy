@@ -11,11 +11,18 @@ import MapKit
 struct ActivityDetailView: View {
     let activity: Activity
     
+    @StateObject private var locationManager: LocationManager
+    
     @State private var startPosition = MapCameraPosition.automatic
     @State private var mapRegion = MKCoordinateRegion()
-    @State private var locationManager = LocationManager()
     @State private var places: [Place] = []
     
+    init(appState: AppStateManager, activity: Activity) {
+        self.activity = activity
+        self ._locationManager = StateObject(
+            wrappedValue: LocationManager(state: appState)
+        )
+    }
     var body: some View {
         VStack(spacing: 20) {
             
@@ -100,16 +107,18 @@ struct Place: Identifiable {
 
 #Preview {
     ActivityDetailView(
-               activity: Activity(
-                   name: "Escape room",
-                   minPeople: 2,
-                   isDate: true,
-                   locationRequirement: .indoor,
-                   goOut: true,
-                   types: ["Experiences"],
-                   energyLevel: .medium,
-                   priceLevel: .medium,
-                   requiresFocus: true
+        appState: AppStateManager(),
+        activity: Activity(
+            name: "Escape room",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Experiences"],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
                )
            )
 }
