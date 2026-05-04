@@ -150,6 +150,20 @@ struct ActivityData {
             seasons: [.winter, .spring, .summer, .fall]
             
             ),
+        
+        Activity(
+            name: "Read a book",
+            minPeople: 1,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: ["Chill","Study/Productive"],
+            energyLevel: .low,
+            priceLevel: .low,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+            
+            ),
         //////////////////////////////////////////////////////////////////////////
         
         
@@ -235,31 +249,6 @@ struct ActivityData {
             seasons: [.spring, .summer]
         ),
         
-        Activity(
-            name: "Thrift Shopping",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .outdoor,
-            goOut: true,
-            types: ["Social", "Shopping","Fun"],
-            energyLevel: .high,
-            priceLevel: .medium,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Bookstore Shopping",
-            minPeople: 1,
-            isDate: true,
-            locationRequirement: .outdoor,
-            goOut: true,
-            types: ["Study/Productive", "Entertainment"],
-            energyLevel: .medium,
-            priceLevel: .medium,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
         //////////////////////////////////////////////////////////////////////////
         
        
@@ -307,6 +296,32 @@ struct ActivityData {
             locationRequirement: .indoor,
             goOut: true,
             types: ["Sports & Fitness", "Entertainment"],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Thrift Shopping",
+            minPeople: 1,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Social", "Shopping","Fun"],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Bookstore Shopping",
+            minPeople: 1,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: ["Study/Productive", "Entertainment"],
             energyLevel: .medium,
             priceLevel: .medium,
             requiresFocus: false,
