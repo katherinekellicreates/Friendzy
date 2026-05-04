@@ -30,9 +30,19 @@ struct ActivityDetailView: View {
             Text(activity.name)
                 .font(Font.custom("Bodoni 72 Oldstyle", size: 35))
             
-            HStack {
-                Text(activity.energyLevel.emoji)
-                Text(activity.priceLevel.display)
+            VStack(spacing: 10) {
+                
+                HStack(spacing: 20) {
+                    Text("Energy: \(activity.energyLevel.emoji)")
+                    Text("Cost: \(activity.priceLevel.display)")
+                    
+                    if activity.requiresFocus {
+                        Text("🧠 Focus")
+                    } else {
+                        Text("😌 Chill")
+                    }
+                }
+                .font(.headline)
             }
             
             VStack(spacing: 8) {
@@ -87,7 +97,6 @@ struct ActivityDetailView: View {
                 startPosition = .userLocation(fallback: .automatic)
                 updateCamera()
             }
-
             .onChange(of: radius) {
                 updateCamera()
             }
