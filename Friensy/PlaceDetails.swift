@@ -13,12 +13,15 @@ struct PlaceDetails: View {
     var body: some View {
         let placemark = mapItem.placemark
         
-        let address =
-        (placemark.subThoroughfare ?? "") + " " +
-        (placemark.thoroughfare ?? "") + "\n" +
-        (placemark.locality ?? "") + ", " +
-        (placemark.administrativeArea ?? "") + " " +
-        (placemark.postalCode ?? "")
+        let address = [
+            placemark.subThoroughfare,
+            placemark.thoroughfare,
+            placemark.locality,
+            placemark.administrativeArea,
+            placemark.postalCode
+        ]
+        .compactMap { $0 }
+        .joined(separator: ", ")
         
         VStack(spacing: 20) {
             
