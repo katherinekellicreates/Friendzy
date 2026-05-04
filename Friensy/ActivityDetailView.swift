@@ -12,10 +12,11 @@ struct ActivityDetailView: View {
     let activity: Activity
     
     @StateObject private var locationManager: LocationManager
-    
     @State private var startPosition = MapCameraPosition.automatic
     @State private var mapRegion = MKCoordinateRegion()
     @State private var places: [Place] = []
+    @State private var radius: Double = 5
+    @State private var userLocation: CLLocationCoordinate2D?
     
     init(appState: AppStateManager, activity: Activity) {
         self.activity = activity
@@ -34,8 +35,32 @@ struct ActivityDetailView: View {
                 Text(activity.priceLevel.display)
             }
             
+            VStack(spacing: 8) {
+                Text("Radius")
+                
+                Picker("Radius", selection: $radius) {
+                    Text("2 mi").tag(2.0)
+                    Text("5 mi").tag(5.0)
+                    Text("10 mi").tag(10.0)
+                    Text("15 mi").tag(15.0)
+                    Text("20 mi").tag(20.0)
+                    Text("25+ mi").tag(25.0)
+                }
+                .pickerStyle(.segmented)
+                .scaleEffect(0.9)
+            }
+            .padding()
+            
             Map(position: $startPosition) {
                 UserAnnotation()
+                
+                if let location = locationManager.userLocation {
+                        MapCircle(
+                            center: location,
+                            radius: radius * 1609.34
+                        )
+                        .foregroundStyle(.pink.opacity(0.15))
+                    }
                 
                 ForEach(places) { place in
                     Annotation(
