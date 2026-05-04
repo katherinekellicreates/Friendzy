@@ -23,4 +23,10 @@ struct AppState {
     
     //tell me more
     var selectedTypes: Set<String> = []
+    
+    //season
+    var latitude: Double = 0
+    var currentSeason: Season = .summer
+    var city: String = ""
+    var zip: String = ""
 }

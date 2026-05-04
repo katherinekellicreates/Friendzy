@@ -8,22 +8,25 @@
 import Foundation
 import CoreLocation
 import MapKit
+import Combine
 
-@Observable
-class LocationManager: NSObject, CLLocationManagerDelegate {
+
+class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
-    var locationManager = CLLocationManager()
-    var userLocation: CLLocationCoordinate2D?
+    @Published var state: AppStateManager
+    @Published var locationManager = CLLocationManager()
+    @Published var userLocation: CLLocationCoordinate2D?
     
-    var city = ""
-    var zip = ""
+    @Published var city = ""
+    @Published var zip = ""
     
-    override init() {
+    init(state: AppStateManager) {
+        self.state = state
         super.init()
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        // PREVIEW SAFE GUARD
         if !ProcessInfo.processInfo.environment.keys.contains("XCODE_RUNNING_FOR_PREVIEWS") {
             locationManager.startUpdatingLocation()
         }
@@ -32,6 +35,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         userLocation = location.coordinate
+        
+        let lat = location.coordinate.latitude
+        
+        DispatchQueue.main.async {
+            
+            self.state.state.latitude = lat
+            
+            self.state.state.currentSeason = SeasonManager.season(latitude: lat)
+        }
         
         // don't run geocoder in preview
         guard !ProcessInfo.processInfo.environment.keys.contains("XCODE_RUNNING_FOR_PREVIEWS") else {

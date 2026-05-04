@@ -11,10 +11,16 @@ import MapKit
 struct Where: View {
     @EnvironmentObject var appState: AppStateManager
     @State private var startPosition = MapCameraPosition.automatic
-    @State private var locationManager = LocationManager()
     @State private var radius: Double = 5
-    @State private var weatherManager = WeatherManager()
+
+    @StateObject private var weatherManager = WeatherManager()
+    @StateObject private var locationManager: LocationManager
     
+    init(appState: AppStateManager) {
+        _locationManager = StateObject(
+            wrappedValue: LocationManager(state: appState)
+        )
+    }
     var body: some View {
         NavigationView {
             ScrollView {
@@ -34,6 +40,14 @@ struct Where: View {
                         }
                     }
                 
+                    VStack(spacing: 8) {
+                        Text("Season")
+                            .font(Font.custom("Bodoni 72 Oldstyle", size: 20))
+                        Text(appState.state.currentSeason.rawValue.capitalized)
+                            .font(.headline)
+                    }
+                    
+                    
                     .padding(20)
                     VStack(spacing: 5) {
                         Text("Location")
@@ -118,6 +132,7 @@ struct Where: View {
                                 
                                 updateCamera()
                             }
+                        
                         } else {
                             ZStack {
                                 Color.pink.opacity(0.1)
@@ -128,6 +143,7 @@ struct Where: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                     }
+                    
                     .aspectRatio(1, contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(
@@ -192,6 +208,6 @@ struct Where: View {
     }
 }
 #Preview {
-    Where()
+    Where(appState: AppStateManager())
         .environmentObject(AppStateManager())
 }

@@ -10,10 +10,11 @@ import SwiftUI
 struct Results: View {
     
     @EnvironmentObject var appState: AppStateManager
+    var ideas: [Activity] {
+        ActivityData.generateIdeas(from: appState.state)
+    }
     
     var body: some View {
-        
-        let ideas = ActivityData.generateIdeas(from: appState.state)
         
         VStack {
             
@@ -22,10 +23,19 @@ struct Results: View {
             
             if ideas.isEmpty {
                 Text("No matches — try different settings")
+                
             } else {
+                
                 List(ideas, id: \.name) { activity in
-                    NavigationLink(destination: ActivityDetailView(activity: activity)) {
+                    
+                    NavigationLink(
+                        destination: ActivityDetailView(
+                        appState: appState,
+                        activity: activity
+                        )
+                    ){
                         VStack(alignment: .leading) {
+                            
                             Text(activity.name)
                                 .font(Font.custom("Bodoni 72 Oldstyle", size: 25))
                             
@@ -40,6 +50,7 @@ struct Results: View {
                         }
                     }
                 }
+                .listStyle(.plain)
             }
         }
     }
