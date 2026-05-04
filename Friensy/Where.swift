@@ -30,38 +30,38 @@ struct Where: View {
                   
                     VStack(spacing: 10) {
                         Text("Weather")
-                        
+                            .font(Font.custom("Bodoni 72 Oldstyle", size: 20))
                         if weatherManager.temperature != 0 {
                             Text("\(weatherEmoji()) \(Int(weatherManager.temperature))°F")
-                                .font(.system(size: 50))
+                                .font(.custom("Bodoni 72 Oldstyle", size: 30))
                         } else {
                             Text("Loading weather...")
                                 .foregroundColor(.gray)
                         }
                     }
                 
-                    VStack(spacing: 8) {
+                    VStack(spacing: 4) {
                         Text("Season")
                             .font(Font.custom("Bodoni 72 Oldstyle", size: 20))
                         Text(appState.state.currentSeason.rawValue.capitalized)
-                            .font(.headline)
+                            .font(.custom("Bodoni 72 Oldstyle", size: 25))
+                            
+                        
                     }
                     
                     
-                    .padding(20)
+                    .padding(15)
                     VStack(spacing: 5) {
-                        Text("Location")
-                            .font((Font.custom("Bodoni 72 Oldstyle", size: 20)))
                             
                         Picker("", selection: $appState.state.selectedLocation) {
                             Text("Indoor").tag(LocationRequirement.indoor)
+                            
                             Text("Outdoor").tag(LocationRequirement.outdoor)
                         }
                         .font((Font.custom("Bodoni 72 Oldstyle", size: 20)))
                         .pickerStyle (.segmented)
                         .frame(width: 260, height: 40)
                     }
-                    .padding()
                     
                     VStack(spacing: 8) {
                         Text("Location")
@@ -70,7 +70,7 @@ struct Where: View {
                         if locationManager.city != "" {
                             
                             Text("\(locationManager.city), \(locationManager.zip)")
-                                .font(.headline)
+                                .font(.custom("Bodoni 72 Oldstyle", size: 30))
                             
                         } else {
                             Text("Fetching location...")
