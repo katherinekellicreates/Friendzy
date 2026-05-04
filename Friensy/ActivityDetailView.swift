@@ -42,8 +42,19 @@ struct ActivityDetailView: View {
                         place.mapItem.name ?? "",
                         coordinate: place.mapItem.placemark.coordinate
                     ) {
-                        Text("⭐️")
-                            .font(.system(size: 55))
+                        NavigationLink(
+                            destination: PlaceDetails(mapItem: place.mapItem)
+                        ) {
+                            VStack {
+                                Text("⭐️")
+                                    .font(.system(size: 45))
+                                
+                                Text(place.mapItem.name ?? "")
+                                    .font(.caption)
+                                    .foregroundColor(.black)
+                                    .lineLimit(1)
+                            }
+                        }
                     }
                 }
             }
