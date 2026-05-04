@@ -36,6 +36,7 @@ struct ActivityDetailView: View {
                         coordinate: place.mapItem.placemark.coordinate
                     ) {
                         Text("⭐️")
+                            .font(.system(size: 55))
                     }
                 }
             }
