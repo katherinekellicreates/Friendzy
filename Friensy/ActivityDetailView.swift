@@ -83,6 +83,14 @@ struct ActivityDetailView: View {
                     }
                 }
             }
+            .onAppear {
+                startPosition = .userLocation(fallback: .automatic)
+                updateCamera()
+            }
+
+            .onChange(of: radius) {
+                updateCamera()
+            }
             .onMapCameraChange { context in
                 mapRegion = context.region
                 performSearch()
@@ -134,6 +142,24 @@ struct ActivityDetailView: View {
             return activity.name
         }
     }
+    
+    func updateCamera() {
+        if let location = locationManager.userLocation {
+            
+            let distance = radius * 1609.34
+            
+            startPosition = .region(
+                MKCoordinateRegion(
+                    center: location,
+                    span: MKCoordinateSpan(
+                        latitudeDelta: distance / 111000,
+                        longitudeDelta: distance / 111000
+                    )
+                )
+            )
+        }
+    }
+    
 }
 
 struct Place: Identifiable {
