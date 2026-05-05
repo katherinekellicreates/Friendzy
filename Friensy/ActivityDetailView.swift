@@ -112,6 +112,49 @@ struct ActivityDetailView: View {
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding()
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    
+                    Text("Locations near you")
+                        .font(.title3)
+                        .bold()
+                        .padding(.horizontal)
+                    
+                    if places.isEmpty {
+                        Text("No locations found")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal)
+                    } else {
+                        
+                        ForEach(places.prefix(10)) { place in
+                            
+                            NavigationLink(
+                                destination: PlaceDetails(mapItem: place.mapItem)
+                            ) {
+                                HStack(spacing: 12) {
+                                    
+                                    Text("⭐️")
+                                        .font(.title2)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(place.mapItem.name ?? "Unknown")
+                                            .font(.headline)
+                                        
+                                        if let locality = place.mapItem.placemark.locality {
+                                            Text(locality)
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
+                                    
+                                    Spacer()
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom)
             }
             
             Spacer()
@@ -175,6 +218,7 @@ struct ActivityDetailView: View {
 struct Place: Identifiable {
     let id = UUID()
     let mapItem: MKMapItem
+    var distance: Double = 0
 }
 
 #Preview {
