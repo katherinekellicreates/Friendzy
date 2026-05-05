@@ -97,18 +97,25 @@ struct ActivityDetailView: View {
                 .onAppear {
                     startPosition = .userLocation(fallback: .automatic)
                     updateCamera()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        performSearch()
+                    }
                 }
                 .onChange(of: radius) {
                     updateCamera()
                 }
                 .onMapCameraChange { context in
                     mapRegion = context.region
-                    performSearch()
+                }
+                .onMapCameraChange { context in
+                    mapRegion = context.region
                 }
                 .aspectRatio(1, contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(
                     RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color(.pink.opacity(0.4)), lineWidth: 6)
+                        .stroke(Color(.pink.opacity(0.4)), lineWidth: 10)
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding()
@@ -144,6 +151,10 @@ struct ActivityDetailView: View {
                                             Text(locality)
                                                 .font(.caption)
                                                 .foregroundColor(.gray)
+                                            
+                                            Text("\(place.distance / 1609.34, specifier: "%.1f") mi away")
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
                                         }
                                     }
                                     
@@ -168,12 +179,27 @@ struct ActivityDetailView: View {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchQueryForActivity()
         request.region = mapRegion
-        request.region = mapRegion
         let search = MKLocalSearch(request: request)
         search.start { response, _ in
-            if let response = response {
-                places = response.mapItems.map { Place(mapItem: $0) }
+            guard let response = response else { return }
+            
+            let userLoc = locationManager.userLocation
+            
+            places = response.mapItems.map { item in
+                
+                var place = Place(mapItem: item)
+                if let userLoc = userLoc,
+                   let itemLocation = item.placemark.location {
+                    
+                    let userCL = CLLocation(
+                        latitude: userLoc.latitude,
+                        longitude: userLoc.longitude
+                    )
+                    place.distance = itemLocation.distance(from: userCL)
+                }
+                return place
             }
+            places.sort { $0.distance < $1.distance }
         }
     }
     
@@ -235,6 +261,6 @@ struct Place: Identifiable {
             priceLevel: .medium,
             requiresFocus: true,
             seasons: [.winter, .spring, .summer, .fall]
-               )
-           )
+        )
+    )
 }
