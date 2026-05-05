@@ -73,6 +73,58 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "Monopoly",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: ["Entertainment,Social,Goofy"],
+            energyLevel: .medium,
+            priceLevel: .free,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Scrabble",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: ["Entertainment, Social, Brain"],
+            energyLevel: .medium,
+            priceLevel: .free,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Binge Night",
+            minPeople: 1,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: ["Goofy,Social,Enertainment"],
+            energyLevel: .low,
+            priceLevel: .free,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Card Games",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: ["Experiences,Brain"],
+            energyLevel: .medium,
+            priceLevel: .free,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
             name: "Board games",
             minPeople: 2,
             isDate: true,
@@ -185,6 +237,32 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "Picnic",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Goofy,Food & Drinks, Social, Artsy/Creativity"],
+            energyLevel: .medium,
+            priceLevel: .free,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Concert",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: ["Social,Music,Artsy/Creativity"],
+            energyLevel: .high,
+            priceLevel: .high,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
             name: "Mini golf",
             minPeople: 2,
             isDate: true,
@@ -195,6 +273,19 @@ struct ActivityData {
             priceLevel: .medium,
             requiresFocus: false,
             seasons: [.spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Go to a Sports Game",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: ["Sports & Fitness,Social"],
+            energyLevel: .medium,
+            priceLevel: .high,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -237,6 +328,45 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "Festival",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: ["Food & Drinks, Artsy/Creativity, Social, Adventure, Goofy"],
+            energyLevel: .high,
+            priceLevel: .high,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Zoo",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: ["Social,Goofy"],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Nature Walk",
+            minPeople: 1,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: ["Adventure,Spontaneous,Sports & Fitness"],
+            energyLevel: .medium,
+            priceLevel: .free,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
             name: "Beach Day",
             minPeople: 2,
             isDate: true,
@@ -270,6 +400,19 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "Karoake",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Social,Music,Goofy"],
+            energyLevel: .medium,
+            priceLevel: .high,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
             name: "Painting",
             minPeople: 1,
             isDate: true,
@@ -299,6 +442,84 @@ struct ActivityData {
             energyLevel: .medium,
             priceLevel: .medium,
             requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Poker",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Experiences, Social, Entertainment"],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Museum",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Experiences,Artsy/Creativity"],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Aquarium",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Adventure,Artys/Creativity"],
+            energyLevel: .medium,
+            priceLevel: .high,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Concert",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Social,Music,Artsy/Creativity"],
+            energyLevel: .high,
+            priceLevel: .high,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Go To a Sports Game",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Sports & Fitness, Social"],
+            energyLevel: .medium,
+            priceLevel: .high,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Workout",
+            minPeople: 1,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Experiences,Adventure,Sports & Fitness"],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: true,
             seasons: [.winter, .spring, .summer, .fall]
         ),
         
@@ -340,6 +561,19 @@ struct ActivityData {
             requiresFocus: false,
             seasons: [.winter, .spring, .summer, .fall]
         ),
+       
+        Activity(
+            name: "Coffee Run",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: ["Experiences,food & Drinks"],
+            energyLevel: .low,
+            priceLevel: .medium,
+            requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
         
         Activity(
             name: "Escape room",
@@ -367,6 +601,7 @@ struct ActivityData {
         )
     ]
     
+
     //////////////////////////////////////////////////////////////////////////////
     
     static func generateIdeas(from state: AppState) -> [Activity] {
