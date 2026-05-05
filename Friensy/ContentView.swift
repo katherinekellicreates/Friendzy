@@ -17,7 +17,7 @@ struct ContentView: View {
             ZStack {
                 Color("Pink").ignoresSafeArea(.all)
                 VStack {
-                    Text("Friendsy")
+                    Text("Friendzy")
                         .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
                     NavigationLink(destination: WhosComing()) {
                         Text("Plan")
