@@ -319,7 +319,7 @@ struct ActivityData {
             name: "Bookstore Shopping",
             minPeople: 1,
             isDate: true,
-            locationRequirement: .outdoor,
+            locationRequirement: .indoor,
             goOut: true,
             types: ["Study/Productive", "Entertainment"],
             energyLevel: .medium,
