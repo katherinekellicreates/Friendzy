@@ -15,7 +15,7 @@ struct ActivityDetailView: View {
     @State private var startPosition = MapCameraPosition.automatic
     @State private var mapRegion = MKCoordinateRegion()
     @State private var places: [Place] = []
-    @State private var radius: Double = 5
+    @State private var radius: Double = 20
     @State private var userLocation: CLLocationCoordinate2D?
     
     init(appState: AppStateManager, activity: Activity) {
@@ -125,9 +125,8 @@ struct ActivityDetailView: View {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchQueryForActivity()
         request.region = mapRegion
-        
+        request.region = mapRegion
         let search = MKLocalSearch(request: request)
-        
         search.start { response, _ in
             if let response = response {
                 places = response.mapItems.map { Place(mapItem: $0) }
