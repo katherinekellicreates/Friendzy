@@ -15,7 +15,7 @@ struct ActivityDetailView: View {
     @State private var startPosition = MapCameraPosition.automatic
     @State private var mapRegion = MKCoordinateRegion()
     @State private var places: [Place] = []
-    @State private var radius: Double = 5
+    @State private var radius: Double = 20
     @State private var userLocation: CLLocationCoordinate2D?
     
     init(appState: AppStateManager, activity: Activity) {
@@ -45,72 +45,74 @@ struct ActivityDetailView: View {
                 .font(.headline)
             }
             
-            VStack(spacing: 8) {
-                Text("Radius")
-                
-                Picker("Radius", selection: $radius) {
-                    Text("2 mi").tag(2.0)
-                    Text("5 mi").tag(5.0)
-                    Text("10 mi").tag(10.0)
-                    Text("15 mi").tag(15.0)
-                    Text("20 mi").tag(20.0)
-                    Text("25+ mi").tag(25.0)
+            if activity.goOut {
+                VStack(spacing: 8) {
+                    Text("Radius")
+                    
+                    Picker("Radius", selection: $radius) {
+                        Text("2 mi").tag(2.0)
+                        Text("5 mi").tag(5.0)
+                        Text("10 mi").tag(10.0)
+                        Text("15 mi").tag(15.0)
+                        Text("20 mi").tag(20.0)
+                        Text("25+ mi").tag(25.0)
+                    }
+                    .pickerStyle(.segmented)
+                    .scaleEffect(0.9)
                 }
-                .pickerStyle(.segmented)
-                .scaleEffect(0.9)
-            }
-            .padding()
-            
-            Map(position: $startPosition) {
-                UserAnnotation()
+                .padding()
                 
-                if let location = locationManager.userLocation {
+                Map(position: $startPosition) {
+                    UserAnnotation()
+                    
+                    if let location = locationManager.userLocation {
                         MapCircle(
                             center: location,
                             radius: radius * 1609.34
                         )
                         .foregroundStyle(.pink.opacity(0.15))
                     }
-                
-                ForEach(places) { place in
-                    Annotation(
-                        place.mapItem.name ?? "",
-                        coordinate: place.mapItem.placemark.coordinate
-                    ) {
-                        NavigationLink(
-                            destination: PlaceDetails(mapItem: place.mapItem)
+                    
+                    ForEach(places) { place in
+                        Annotation(
+                            place.mapItem.name ?? "",
+                            coordinate: place.mapItem.placemark.coordinate
                         ) {
-                            VStack {
-                                Text("⭐️")
-                                    .font(.system(size: 45))
-                                
-                                Text(place.mapItem.name ?? "")
-                                    .font(.caption)
-                                    .foregroundColor(.black)
-                                    .lineLimit(1)
+                            NavigationLink(
+                                destination: PlaceDetails(mapItem: place.mapItem)
+                            ) {
+                                VStack {
+                                    Text("⭐️")
+                                        .font(.system(size: 45))
+                                    
+                                    Text(place.mapItem.name ?? "")
+                                        .font(.caption)
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                }
                             }
                         }
                     }
                 }
+                .onAppear {
+                    startPosition = .userLocation(fallback: .automatic)
+                    updateCamera()
+                }
+                .onChange(of: radius) {
+                    updateCamera()
+                }
+                .onMapCameraChange { context in
+                    mapRegion = context.region
+                    performSearch()
+                }
+                .aspectRatio(1, contentMode: .fit)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(Color(.pink.opacity(0.4)), lineWidth: 6)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .padding()
             }
-            .onAppear {
-                startPosition = .userLocation(fallback: .automatic)
-                updateCamera()
-            }
-            .onChange(of: radius) {
-                updateCamera()
-            }
-            .onMapCameraChange { context in
-                mapRegion = context.region
-                performSearch()
-            }
-            .aspectRatio(1, contentMode: .fit)
-            .overlay(
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color(.pink.opacity(0.4)), lineWidth: 6)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding()
             
             Spacer()
         }
@@ -123,9 +125,8 @@ struct ActivityDetailView: View {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchQueryForActivity()
         request.region = mapRegion
-        
+        request.region = mapRegion
         let search = MKLocalSearch(request: request)
-        
         search.start { response, _ in
             if let response = response {
                 places = response.mapItems.map { Place(mapItem: $0) }
