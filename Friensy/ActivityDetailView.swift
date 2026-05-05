@@ -25,153 +25,155 @@ struct ActivityDetailView: View {
         )
     }
     var body: some View {
-        VStack(spacing: 20) {
-            
-            Text(activity.name)
-                .font(Font.custom("Bodoni 72 Oldstyle", size: 35))
-            
-            VStack(spacing: 10) {
+        ScrollView {
+            VStack(spacing: 20) {
                 
-                HStack(spacing: 20) {
-                    Text("Energy: \(activity.energyLevel.emoji)")
-                    Text("Cost: \(activity.priceLevel.display)")
-                    
-                    if activity.requiresFocus {
-                        Text("🧠 Focus")
-                    } else {
-                        Text("😌 Chill")
-                    }
-                }
-                .font(.headline)
-            }
-            
-            if activity.goOut {
-                VStack(spacing: 8) {
-                    Text("Radius")
-                    
-                    Picker("Radius", selection: $radius) {
-                        Text("2 mi").tag(2.0)
-                        Text("5 mi").tag(5.0)
-                        Text("10 mi").tag(10.0)
-                        Text("15 mi").tag(15.0)
-                        Text("20 mi").tag(20.0)
-                        Text("25+ mi").tag(25.0)
-                    }
-                    .pickerStyle(.segmented)
-                    .scaleEffect(0.9)
-                }
-                .padding()
+                Text(activity.name)
+                    .font(Font.custom("Bodoni 72 Oldstyle", size: 35))
                 
-                Map(position: $startPosition) {
-                    UserAnnotation()
+                VStack(spacing: 10) {
                     
-                    if let location = locationManager.userLocation {
-                        MapCircle(
-                            center: location,
-                            radius: radius * 1609.34
-                        )
-                        .foregroundStyle(.pink.opacity(0.15))
-                    }
-                    
-                    ForEach(places) { place in
-                        Annotation(
-                            place.mapItem.name ?? "",
-                            coordinate: place.mapItem.placemark.coordinate
-                        ) {
-                            NavigationLink(
-                                destination: PlaceDetails(mapItem: place.mapItem)
-                            ) {
-                                VStack {
-                                    Text("⭐️")
-                                        .font(.system(size: 45))
-                                    
-                                    Text(place.mapItem.name ?? "")
-                                        .font(.caption)
-                                        .foregroundColor(.black)
-                                        .lineLimit(1)
-                                }
-                            }
-                        }
-                    }
-                }
-                .onAppear {
-                    startPosition = .userLocation(fallback: .automatic)
-                    updateCamera()
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        performSearch()
-                    }
-                }
-                .onChange(of: radius) {
-                    updateCamera()
-                }
-                .onMapCameraChange { context in
-                    mapRegion = context.region
-                }
-                .onMapCameraChange { context in
-                    mapRegion = context.region
-                }
-                .aspectRatio(1, contentMode: .fit)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color(.pink.opacity(0.4)), lineWidth: 10)
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding()
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    
-                    Text("Locations near you")
-                        .font(.title3)
-                        .bold()
-                        .padding(.horizontal)
-                    
-                    if places.isEmpty {
-                        Text("No locations found")
-                            .foregroundColor(.gray)
-                            .padding(.horizontal)
-                    } else {
+                    HStack(spacing: 20) {
+                        Text("Energy: \(activity.energyLevel.emoji)")
+                        Text("Cost: \(activity.priceLevel.display)")
                         
-                        ForEach(places.prefix(10)) { place in
-                            
-                            NavigationLink(
-                                destination: PlaceDetails(mapItem: place.mapItem)
+                        if activity.requiresFocus {
+                            Text("🧠 Focus")
+                        } else {
+                            Text("😌 Chill")
+                        }
+                    }
+                    .font(.headline)
+                }
+                
+                if activity.goOut {
+                    VStack(spacing: 8) {
+                        Text("Radius")
+                        
+                        Picker("Radius", selection: $radius) {
+                            Text("2 mi").tag(2.0)
+                            Text("5 mi").tag(5.0)
+                            Text("10 mi").tag(10.0)
+                            Text("15 mi").tag(15.0)
+                            Text("20 mi").tag(20.0)
+                            Text("25+ mi").tag(25.0)
+                        }
+                        .pickerStyle(.segmented)
+                        .scaleEffect(0.9)
+                    }
+                    .padding()
+                    
+                    Map(position: $startPosition) {
+                        UserAnnotation()
+                        
+                        if let location = locationManager.userLocation {
+                            MapCircle(
+                                center: location,
+                                radius: radius * 1609.34
+                            )
+                            .foregroundStyle(.pink.opacity(0.15))
+                        }
+                        
+                        ForEach(places) { place in
+                            Annotation(
+                                place.mapItem.name ?? "",
+                                coordinate: place.mapItem.placemark.coordinate
                             ) {
-                                HStack(spacing: 12) {
-                                    
-                                    Text("⭐️")
-                                        .font(.title2)
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text(place.mapItem.name ?? "Unknown")
-                                            .font(.headline)
+                                NavigationLink(
+                                    destination: PlaceDetails(mapItem: place.mapItem)
+                                ) {
+                                    VStack {
+                                        Text("⭐️")
+                                            .font(.system(size: 45))
                                         
-                                        if let locality = place.mapItem.placemark.locality {
-                                            Text(locality)
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                            
-                                            Text("\(place.distance / 1609.34, specifier: "%.1f") mi away")
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                        }
+                                        Text(place.mapItem.name ?? "")
+                                            .font(.caption)
+                                            .foregroundColor(.black)
+                                            .lineLimit(1)
                                     }
-                                    
-                                    Spacer()
                                 }
-                                .padding(.horizontal)
                             }
                         }
                     }
+                    .onAppear {
+                        startPosition = .userLocation(fallback: .automatic)
+                        updateCamera()
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            performSearch()
+                        }
+                    }
+                    .onChange(of: radius) {
+                        updateCamera()
+                    }
+                    .onMapCameraChange { context in
+                        mapRegion = context.region
+                    }
+                    .onMapCameraChange { context in
+                        mapRegion = context.region
+                    }
+                    .aspectRatio(1, contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color(.pink.opacity(0.4)), lineWidth: 10)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding()
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        Text("Locations near you")
+                            .font(.title3)
+                            .bold()
+                            .padding(.horizontal)
+                        
+                        if places.isEmpty {
+                            Text("No locations found")
+                                .foregroundColor(.gray)
+                                .padding(.horizontal)
+                        } else {
+                            
+                            ForEach(places.prefix(10)) { place in
+                                
+                                NavigationLink(
+                                    destination: PlaceDetails(mapItem: place.mapItem)
+                                ) {
+                                    HStack(spacing: 12) {
+                                        
+                                        Text("⭐️")
+                                            .font(.title2)
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text(place.mapItem.name ?? "Unknown")
+                                                .font(.headline)
+                                            
+                                            if let locality = place.mapItem.placemark.locality {
+                                                Text(locality)
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                                
+                                                Text("\(place.distance / 1609.34, specifier: "%.1f") mi away")
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                            }
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(.horizontal)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.bottom)
                 }
-                .padding(.bottom)
+                
+                Spacer()
             }
-            
-            Spacer()
-        }
-        .onAppear {
-            startPosition = .userLocation(fallback: .automatic)
+            .onAppear {
+                startPosition = .userLocation(fallback: .automatic)
+            }
         }
     }
     
