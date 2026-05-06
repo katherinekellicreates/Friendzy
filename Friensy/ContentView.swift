@@ -15,16 +15,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("Pink").ignoresSafeArea(.all)
+                Color("Teal").ignoresSafeArea(.all)
                 VStack {
-                    Text("Friendzy")
-                        .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
+                    Image("main2")
+                        .resizable().scaledToFit().frame(width: 350, height: 300)
+                   // Text("Friendzy")
+                       // .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
                     NavigationLink(destination: WhosComing()) {
                         Text("Plan")
                             .frame(width: 100)
                             .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
                             .padding()
-                            .background(Color(.pink.opacity(0.3)))
+                            .background(Color("OurYellow"))
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
