@@ -17,6 +17,7 @@ struct ActivityDetailView: View {
     @State private var places: [Place] = []
     @State private var radius: Double = 20
     @State private var userLocation: CLLocationCoordinate2D?
+    @State private var maxRadius = true
     
     init(appState: AppStateManager, activity: Activity) {
         self.activity = activity
@@ -216,22 +217,31 @@ struct ActivityDetailView: View {
             }
             
             let maxDistance = radius * 1609.34 // miles → meters
-
-            places = uniqueItems.compactMap { item in
+            
+            let selectedRadiusMeters = radius * 1609.34
+            let maxRadiusMeters = 25 * 1609.34
+            
+            var filteredPlaces: [Place] = []
+            var placesAtMaxRadius: [Place] = []
+            
+            for item in uniqueItems {
                 guard let userLoc = userLoc,
-                      let itemLocation = item.placemark.location else { return nil }
-                
+                      let itemLocation = item.placemark.location else { continue }
                 let userCL = CLLocation(latitude: userLoc.latitude, longitude: userLoc.longitude)
                 let distance = userCL.distance(from: itemLocation)
-
-                if distance <= maxDistance {
-                    return Place(mapItem: item, distance: distance)
-                } else {
-                    return nil
+                
+                let place = Place(mapItem: item, distance: distance)
+                if distance <= selectedRadiusMeters {
+                    filteredPlaces.append(place)
+                }
+                if distance <= maxRadiusMeters {
+                    placesAtMaxRadius.append(place)
                 }
             }
-
-            places.sort { $0.distance < $1.distance }
+            // assign filtered results
+            places = filteredPlaces.sorted { $0.distance < $1.distance }
+            // track if anything exists at max radius
+            maxRadius = !placesAtMaxRadius.isEmpty
         }
     }
     
