@@ -131,9 +131,23 @@ struct ActivityDetailView: View {
                             .padding(.horizontal)
                         
                         if places.isEmpty {
-                            Text("No locations found within \(Int(radius)) miles")
-                                .foregroundColor(.gray)
-                                .padding(.horizontal)
+                            if radius < 25 {
+                                VStack(spacing: 10) {
+                                    Text("No locations found within \(Int(radius)) miles")
+                                        .foregroundColor(.gray)
+                                    
+                                    Button("Increase Radius") {
+                                        increaseRadius()
+                                    }
+                                    .padding(8)
+                                    .background(Color.pink.opacity(0.3))
+                                    .cornerRadius(8)
+                                }
+                                
+                            } else {
+                                Text("No locations found within any radius")
+                                    .foregroundColor(.gray)
+                            }
                         } else {
                             
                             ForEach(places.prefix(10)) { place in
@@ -282,6 +296,15 @@ struct ActivityDetailView: View {
                     )
                 )
             )
+        }
+    }
+    
+    func increaseRadius() {
+        let options: [Double] = [2, 5, 10, 15, 20, 25]
+        
+        if let index = options.firstIndex(of: radius),
+           index < options.count - 1 {
+            radius = options[index + 1]
         }
     }
     
