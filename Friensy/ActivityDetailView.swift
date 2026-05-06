@@ -26,319 +26,340 @@ struct ActivityDetailView: View {
         )
     }
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                
-                Text(activity.name)
-                    .font(Font.custom("Bodoni 72 Oldstyle", size: 35))
-                
-                VStack(spacing: 10) {
+        ZStack {
+            Color("Teal").ignoresSafeArea(.all)
+            ScrollView {
+                VStack(spacing: 20) {
                     
-                    HStack(spacing: 20) {
-                        Text("Energy: \(activity.energyLevel.emoji)")
-                        Text("Cost: \(activity.priceLevel.display)")
-                        
-                        if activity.requiresFocus {
-                            Text("🧠 Focus")
-                        } else {
-                            Text("😌 Chill")
-                        }
-                    }
-                    .font(.headline)
-                }
-                
-                if activity.goOut {
-                    VStack(spacing: 8) {
-                        Text("Radius")
-                        
-                        Picker("Radius", selection: $radius) {
-                            Text("2 mi").tag(2.0)
-                            Text("5 mi").tag(5.0)
-                            Text("10 mi").tag(10.0)
-                            Text("15 mi").tag(15.0)
-                            Text("20 mi").tag(20.0)
-                            Text("25+ mi").tag(25.0)
-                        }
-                        .pickerStyle(.segmented)
-                        .scaleEffect(0.9)
-                    }
-                    .padding()
+                    Text(activity.name)
+                        .font(Font.custom("BPreplay-bold", size: 35))
+                        .foregroundColor(.white)
                     
-                    Map(position: $startPosition) {
-                        UserAnnotation()
+                    VStack(spacing: 10) {
                         
-                        if let location = locationManager.userLocation {
-                            MapCircle(
-                                center: location,
-                                radius: radius * 1609.34
-                            )
-                            .foregroundStyle(.pink.opacity(0.15))
-                        }
-                        
-                        ForEach(places) { place in
-                            Annotation(
-                                place.mapItem.name ?? "",
-                                coordinate: place.mapItem.placemark.coordinate
-                            ) {
-                                NavigationLink(
-                                    destination: PlaceDetails(mapItem: place.mapItem)
-                                ) {
-                                    VStack {
-                                        Text("⭐️")
-                                            .font(.system(size: 45))
-                                        
-                                        Text(place.mapItem.name ?? "")
-                                            .font(.caption)
-                                            .foregroundColor(.black)
-                                            .lineLimit(1)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .onAppear {
-                        startPosition = .userLocation(fallback: .automatic)
-                        updateCamera()
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            performSearch()
-                        }
-                    }
-                    .onChange(of: radius) {
-                        updateCamera()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                               performSearch()
-                           }
-                    }
-                    .onMapCameraChange { context in
-                        mapRegion = context.region
-                    }
-                    .aspectRatio(1, contentMode: .fit)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 25)
-                            .stroke(Color(.pink.opacity(0.4)), lineWidth: 10)
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .padding()
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        
-                        Text("Locations near you")
-                            .font(.title3)
-                            .bold()
-                            .padding(.horizontal)
-                        
-                        if places.isEmpty {
-                            if radius < 25 {
-                                VStack(spacing: 10) {
-                                    Text("No locations found within \(Int(radius)) miles")
-                                        .foregroundColor(.gray)
-                                    
-                                    Button("Increase Radius") {
-                                        increaseRadius()
-                                    }
-                                    .padding(8)
-                                    .background(Color.pink.opacity(0.3))
-                                    .cornerRadius(8)
-                                }
-                                
-                            } else {
-                                Text("No locations found within any radius")
-                                    .foregroundColor(.gray)
-                            }
-                        } else {
+                        HStack(spacing: 20) {
+                            Text("Energy: \(activity.energyLevel.emoji)")
+                                .font(Font.custom("BPreplay", size: 20))
+                                .foregroundColor(.white)
+                            Text("Cost: \(activity.priceLevel.display)")
+                                .font(Font.custom("BPreplay", size: 20))
+                                .foregroundColor(.white)
                             
-                            ForEach(places.prefix(10)) { place in
-                                
-                                NavigationLink(
-                                    destination: PlaceDetails(mapItem: place.mapItem)
+                            if activity.requiresFocus {
+                                Text("🧠 Focus")
+                                    .font(Font.custom("BPreplay", size: 20))
+                                    .foregroundColor(.white)
+                            } else {
+                                Text("😌 Chill")
+                                    .font(Font.custom("BPreplay", size: 20))
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .font(.headline)
+                    }
+                    
+                    if activity.goOut {
+                        VStack(spacing: 8) {
+                            Text("Radius")
+                                .font(Font.custom("BPreplay-Bold", size: 23))
+                                .foregroundColor(.white)
+                            
+                            Picker("Radius", selection: $radius) {
+                                Text("2 mi").tag(2.0)
+                                Text("5 mi").tag(5.0)
+                                Text("10 mi").tag(10.0)
+                                Text("15 mi").tag(15.0)
+                                Text("20 mi").tag(20.0)
+                                Text("25+ mi").tag(25.0)
+                            }
+                            .pickerStyle(.segmented)
+                            .scaleEffect(0.9)
+                        }
+                        .padding()
+                        
+                        Map(position: $startPosition) {
+                            UserAnnotation()
+                            
+                            if let location = locationManager.userLocation {
+                                MapCircle(
+                                    center: location,
+                                    radius: radius * 1609.34
+                                )
+                                .foregroundStyle(.teal2.opacity(0.15))
+                            }
+                            
+                            ForEach(places) { place in
+                                Annotation(
+                                    place.mapItem.name ?? "",
+                                    coordinate: place.mapItem.placemark.coordinate
                                 ) {
-                                    HStack(spacing: 12) {
-                                        
-                                        Text("⭐️")
-                                            .font(.title2)
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text(place.mapItem.name ?? "Unknown")
-                                                .font(.headline)
+                                    NavigationLink(
+                                        destination: PlaceDetails(mapItem: place.mapItem)
+                                    ) {
+                                        VStack {
+                                            Text("⭐️")
+                                                .font(.system(size: 45))
                                             
-                                            if let locality = place.mapItem.placemark.locality {
-                                                Text(locality)
-                                                    .font(.caption)
-                                                    .foregroundColor(.gray)
-                                                
-                                                Text("\(place.distance / 1609.34, specifier: "%.1f") mi away")
-                                                    .font(.caption)
-                                                    .foregroundColor(.gray)
-                                            }
+                                            Text(place.mapItem.name ?? "")
+                                                .font(Font.custom("BPreplay-Bold", size: 20))
+                                                .font(.caption)
+                                                .foregroundColor(.white)
+                                                .lineLimit(1)
                                         }
-                                        
-                                        Spacer()
                                     }
-                                    .padding(.horizontal)
                                 }
                             }
                         }
+                        .onAppear {
+                            startPosition = .userLocation(fallback: .automatic)
+                            updateCamera()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                performSearch()
+                            }
+                        }
+                        .onChange(of: radius) {
+                            updateCamera()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                performSearch()
+                            }
+                        }
+                        .onMapCameraChange { context in
+                            mapRegion = context.region
+                        }
+                        .aspectRatio(1, contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color(.teal2.opacity(0.8)), lineWidth: 10)
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding()
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            
+                            Text("Locations near you")
+                                .font(Font.custom("BPreplay-Bold", size: 20))
+                                .foregroundColor(.white)
+                                .padding(.horizontal)
+                            
+                            if places.isEmpty {
+                                if radius < 25 {
+                                    VStack(spacing: 10) {
+                                        Text("No locations found within \(Int(radius)) miles")
+                                            .font(Font.custom("BPreplay", size: 18))
+                                            .foregroundColor(.white)
+                                        
+                                        Button("Increase Radius") {
+                                            increaseRadius()
+                                        }
+                                        .font(Font.custom("BPreplay-Bold", size: 20))
+                                        .foregroundColor(.white)
+                                        .padding(8)
+                                        .background(Color.teal2.opacity(0.3))
+                                        .cornerRadius(8)
+                                    }
+                                    
+                                } else {
+                                    Text("No locations found within any radius")
+                                        .font(Font.custom("BPreplay-Bold", size: 18))
+                                        .foregroundColor(.white)
+                                }
+                            } else {
+                                
+                                ForEach(places.prefix(10)) { place in
+                                    
+                                    NavigationLink(
+                                        destination: PlaceDetails(mapItem: place.mapItem)
+                                    ) {
+                                        HStack(spacing: 12) {
+                                            
+                                            Text("⭐️")
+                                                .font(.title2)
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text(place.mapItem.name ?? "Unknown")
+                                                    .font(Font.custom("BPreplay", size: 20))
+                                                    .font(.headline)
+                                                    .foregroundColor(.white)
+                                                
+                                                if let locality = place.mapItem.placemark.locality {
+                                                    Text(locality)
+                                                        .font(.caption)
+                                                        .foregroundColor(.white)
+                                                    
+                                                    Text("\(place.distance / 1609.34, specifier: "%.1f") mi away")
+                                                        .font(Font.custom("BPreplay", size: 18))
+                                                        .foregroundColor(.white)
+                                                }
+                                            }
+                                            
+                                            Spacer()
+                                        }
+                                        .padding(.horizontal)
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.bottom)
                     }
-                    .padding(.bottom)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
-            }
-            .onAppear {
-                startPosition = .userLocation(fallback: .automatic)
+                .onAppear {
+                    startPosition = .userLocation(fallback: .automatic)
+                }
             }
         }
     }
-    
-    func performSearch() {
-        let queries = searchQueriesForActivity()
         
-        var allResults: [MKMapItem] = []
-        let group = DispatchGroup()
-        
-        for query in queries {
-            group.enter()
+        func performSearch() {
+            let queries = searchQueriesForActivity()
             
-            let request = MKLocalSearch.Request()
-            request.naturalLanguageQuery = query
-            if let userLoc = locationManager.userLocation {
-                let bigSpan = MKCoordinateSpan(
-                    latitudeDelta: (25 * 1609.34) / 111000,
-                    longitudeDelta: (25 * 1609.34) / 111000
-                )
+            var allResults: [MKMapItem] = []
+            let group = DispatchGroup()
+            
+            for query in queries {
+                group.enter()
                 
-                request.region = MKCoordinateRegion(
-                    center: userLoc,
-                    span: bigSpan
-                )
+                let request = MKLocalSearch.Request()
+                request.naturalLanguageQuery = query
+                if let userLoc = locationManager.userLocation {
+                    let bigSpan = MKCoordinateSpan(
+                        latitudeDelta: (25 * 1609.34) / 111000,
+                        longitudeDelta: (25 * 1609.34) / 111000
+                    )
+                    
+                    request.region = MKCoordinateRegion(
+                        center: userLoc,
+                        span: bigSpan
+                    )
+                }
+                
+                let search = MKLocalSearch(request: request)
+                
+                search.start { response, _ in
+                    if let items = response?.mapItems {
+                        allResults.append(contentsOf: items)
+                    }
+                    group.leave()
+                }
             }
             
-            let search = MKLocalSearch(request: request)
-            
-            search.start { response, _ in
-                if let items = response?.mapItems {
-                    allResults.append(contentsOf: items)
+            group.notify(queue: .main) {
+                
+                let userLoc = locationManager.userLocation
+                
+                var uniqueItems: [MKMapItem] = []
+                var seenNames: Set<String> = []
+                
+                for item in allResults {
+                    if let name = item.name, !seenNames.contains(name) {
+                        seenNames.insert(name)
+                        uniqueItems.append(item)
+                    }
                 }
-                group.leave()
+                
+                let selectedRadiusMeters = radius * 1609.34
+                let maxRadiusMeters = 25 * 1609.34
+                
+                var filteredPlaces: [Place] = []
+                var placesAtMaxRadius: [Place] = []
+                
+                for item in uniqueItems {
+                    guard let userLoc = userLoc,
+                          let itemLocation = item.placemark.location else { continue }
+                    let userCL = CLLocation(latitude: userLoc.latitude, longitude: userLoc.longitude)
+                    let distance = userCL.distance(from: itemLocation)
+                    
+                    let place = Place(mapItem: item, distance: distance)
+                    if distance <= selectedRadiusMeters {
+                        filteredPlaces.append(place)
+                    }
+                    if distance <= maxRadiusMeters {
+                        placesAtMaxRadius.append(place)
+                    }
+                }
+                // assign filtered results
+                places = filteredPlaces.sorted { $0.distance < $1.distance }
+                // track if anything exists at max radius
+                maxRadius = !placesAtMaxRadius.isEmpty
             }
         }
         
-        group.notify(queue: .main) {
-            
-            let userLoc = locationManager.userLocation
-            
-            var uniqueItems: [MKMapItem] = []
-            var seenNames: Set<String> = []
-            
-            for item in allResults {
-                if let name = item.name, !seenNames.contains(name) {
-                    seenNames.insert(name)
-                    uniqueItems.append(item)
-                }
+        func searchQueriesForActivity() -> [String] {
+            switch activity.name {
+            case "Escape room":
+                return ["escape room", "puzzle room"]
+            case "Bowling":
+                return ["bowling alley", "bowling"]
+            case "Arcade":
+                return ["arcade", "game center"]
+            case "Mini golf":
+                return ["mini golf"]
+            case "Amusement Park":
+                return ["amusement park", "theme park"]
+            case "Hiking":
+                return ["hiking trail", "nature preserve"]
+            case "Thrifting":
+                return ["thrift store", "Goodwill", "Salvation Army", "House of Hope"]
+            case "Go To a Sports Game":
+                return ["sports", "stadium", "arena"]
+            case "Bookstore Shopping":
+                return ["bookstore", "bookshop", "Barnes & Noble", "book store", "book shop", "book"]
+            default:
+                return [activity.name]
             }
-            
-            let selectedRadiusMeters = radius * 1609.34
-            let maxRadiusMeters = 25 * 1609.34
-            
-            var filteredPlaces: [Place] = []
-            var placesAtMaxRadius: [Place] = []
-            
-            for item in uniqueItems {
-                guard let userLoc = userLoc,
-                      let itemLocation = item.placemark.location else { continue }
-                let userCL = CLLocation(latitude: userLoc.latitude, longitude: userLoc.longitude)
-                let distance = userCL.distance(from: itemLocation)
+        }
+        
+        func updateCamera() {
+            if let location = locationManager.userLocation {
                 
-                let place = Place(mapItem: item, distance: distance)
-                if distance <= selectedRadiusMeters {
-                    filteredPlaces.append(place)
-                }
-                if distance <= maxRadiusMeters {
-                    placesAtMaxRadius.append(place)
-                }
-            }
-            // assign filtered results
-            places = filteredPlaces.sorted { $0.distance < $1.distance }
-            // track if anything exists at max radius
-            maxRadius = !placesAtMaxRadius.isEmpty
-        }
-    }
-    
-    func searchQueriesForActivity() -> [String] {
-        switch activity.name {
-        case "Escape room":
-            return ["escape room", "puzzle room"]
-        case "Bowling":
-            return ["bowling alley", "bowling"]
-        case "Arcade":
-            return ["arcade", "game center"]
-        case "Mini golf":
-            return ["mini golf"]
-        case "Amusement Park":
-            return ["amusement park", "theme park"]
-        case "Hiking":
-            return ["hiking trail", "nature preserve"]
-        case "Thrifting":
-            return ["thrift store", "Goodwill", "Salvation Army", "House of Hope"]
-        case "Go To a Sports Game":
-            return ["sports", "stadium", "arena"]
-        case "Bookstore Shopping":
-            return ["bookstore", "bookshop", "Barnes & Noble", "book store", "book shop", "book"]
-        default:
-            return [activity.name]
-        }
-    }
-    
-    func updateCamera() {
-        if let location = locationManager.userLocation {
-            
-            let distance = radius * 1609.34
-            
-            startPosition = .region(
-                MKCoordinateRegion(
-                    center: location,
-                    span: MKCoordinateSpan(
-                        latitudeDelta: distance / 111000,
-                        longitudeDelta: distance / 111000
+                let distance = radius * 1609.34
+                
+                startPosition = .region(
+                    MKCoordinateRegion(
+                        center: location,
+                        span: MKCoordinateSpan(
+                            latitudeDelta: distance / 111000,
+                            longitudeDelta: distance / 111000
+                        )
                     )
                 )
-            )
+            }
         }
-    }
-    
-    func increaseRadius() {
-        let options: [Double] = [2, 5, 10, 15, 20, 25]
         
-        if let index = options.firstIndex(of: radius),
-           index < options.count - 1 {
-            radius = options[index + 1]
+        func increaseRadius() {
+            let options: [Double] = [2, 5, 10, 15, 20, 25]
+            
+            if let index = options.firstIndex(of: radius),
+               index < options.count - 1 {
+                radius = options[index + 1]
+            }
         }
+        
     }
     
-}
-
-struct Place: Identifiable {
-    let id = UUID()
-    let mapItem: MKMapItem
-    var distance: Double = 0
-}
-
-#Preview {
-    ActivityDetailView(
-        appState: AppStateManager(),
-        activity: Activity(
-            name: "Escape room",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Experiences"],
-            energyLevel: .medium,
-            priceLevel: .medium,
-            requiresFocus: true,
-            seasons: [.winter, .spring, .summer, .fall]
+    struct Place: Identifiable {
+        let id = UUID()
+        let mapItem: MKMapItem
+        var distance: Double = 0
+    }
+    
+    #Preview {
+        ActivityDetailView(
+            appState: AppStateManager(),
+            activity: Activity(
+                name: "Escape room",
+                minPeople: 2,
+                isDate: true,
+                locationRequirement: .indoor,
+                goOut: true,
+                types: ["Experiences"],
+                energyLevel: .medium,
+                priceLevel: .medium,
+                requiresFocus: true,
+                seasons: [.winter, .spring, .summer, .fall]
+            )
         )
-    )
-}
+    }

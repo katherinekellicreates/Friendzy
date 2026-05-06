@@ -70,87 +70,6 @@ struct ActivityData {
             priceLevel: .free,
             requiresFocus: false,
             seasons: [.winter, .spring, .summer, .fall]
-            
-        ),
-        
-        Activity(
-            name: "Scrapbooking",
-            minPeople: 1,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Artsy/Creativity", "Social"],
-            energyLevel: .low,
-            priceLevel: .free,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Make A Pintrest Board",
-            minPeople: 1,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Social", "Entertainment","Goofy","Digital","Social"],
-            energyLevel: .low,
-            priceLevel: .free,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Organizing Room",
-            minPeople: 1,
-            isDate: false,
-            locationRequirement: .indoor,
-            goOut: false,
-            types: ["Study/Productive"],
-            energyLevel: .high,
-            priceLevel: .free,
-            requiresFocus: true,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Vision Board Making",
-            minPeople: 1,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Artsy/Creativity", "Social"],
-            energyLevel: .low,
-            priceLevel: .free,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        
-        
-        Activity(
-            name: "Make A playlist",
-            minPeople: 1,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Social", "Digital","music","Goofy","Spontaneous"],
-            energyLevel: .low,
-            priceLevel: .free,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Buzzfeed Quizzes",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Brainy", "Study/Productive"],
-            energyLevel: .low,
-            priceLevel: .free,
-            requiresFocus: true,
-            seasons: [.winter, .spring, .summer, .fall]
         ),
         
         Activity(
@@ -331,20 +250,6 @@ struct ActivityData {
         ),
         
         Activity(
-            name: "Bike Ride",
-            minPeople: 1,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Sports & Fitness","Adventure"],
-            energyLevel: .high,
-            priceLevel: .free,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        
-        Activity(
             name: "Concert",
             minPeople: 2,
             isDate: true,
@@ -495,33 +400,6 @@ struct ActivityData {
         ),
         
         Activity(
-            name: "Photo Shoot",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Digital","Spontaneous","Artsy/Creativity"],
-            energyLevel: .high,
-            priceLevel: .free,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        
-        Activity(
-            name: "Pottery",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Social","Expriences","Artsy/Creativity"],
-            energyLevel: .low,
-            priceLevel: .free,
-            requiresFocus: true,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
             name: "Karoake",
             minPeople: 2,
             isDate: true,
@@ -531,32 +409,6 @@ struct ActivityData {
             energyLevel: .medium,
             priceLevel: .high,
             requiresFocus: true,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Rate Strangers outfits",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Artsy/Creativity", "Entertainment","Social","Shopping","Spontaneous"],
-            energyLevel: .medium,
-            priceLevel: .free,
-            requiresFocus: true,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Most Likely to",
-            minPeople: 3,
-            isDate: false,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Social", "Entertainment","Spontaneous"],
-            energyLevel: .medium,
-            priceLevel: .free,
-            requiresFocus: false,
             seasons: [.winter, .spring, .summer, .fall]
         ),
         
@@ -572,8 +424,6 @@ struct ActivityData {
             requiresFocus: false,
             seasons: [.winter, .spring, .summer, .fall]
         ),
-        
-        
         
         //////////////////////////////////////////////////////////////////////////
         
@@ -592,19 +442,6 @@ struct ActivityData {
             energyLevel: .medium,
             priceLevel: .medium,
             requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
-        
-        Activity(
-            name: "Go to a Play/Musical",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: true,
-            types: ["Artsy/Creativity", "Entertainment","Experiences"],
-            energyLevel: .medium,
-            priceLevel: .high,
-            requiresFocus: true,
             seasons: [.winter, .spring, .summer, .fall]
         ),
         

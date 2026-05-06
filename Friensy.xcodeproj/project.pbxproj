@@ -10,9 +10,22 @@
 		4AE4ECA72F9289630011B383 /* Friensy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Friensy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4ACE39112FABB54100F4E6DD /* Exceptions for "Friensy" folder in "Friensy" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4AE4ECA62F9289630011B383 /* Friensy */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4AE4ECA92F9289630011B383 /* Friensy */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4ACE39112FABB54100F4E6DD /* Exceptions for "Friensy" folder in "Friensy" target */,
+			);
 			path = Friensy;
 			sourceTree = "<group>";
 		};
@@ -256,6 +269,7 @@
 				DEVELOPMENT_TEAM = LSC59DNA2P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Friensy/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Friendzy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires the use of Location Services";
@@ -291,6 +305,7 @@
 				DEVELOPMENT_TEAM = LSC59DNA2P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Friensy/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Friendzy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires the use of Location Services";

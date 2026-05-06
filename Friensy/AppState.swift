@@ -29,4 +29,5 @@ struct AppState {
     var currentSeason: Season = .summer
     var city: String = ""
     var zip: String = ""
+    
 }

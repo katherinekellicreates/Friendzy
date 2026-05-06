@@ -12,36 +12,38 @@ struct Tellmemore: View {
     @EnvironmentObject var appState: AppStateManager
     
     var body: some View {
-        
-        VStack(spacing: 25) {
-            Text("Tell Me More")
-                .font(Font.custom("Bodoni 72 Oldstyle", size: 40))
-            
-            Text("Activity Type")
-                .font(.headline)
-
-            LazyVGrid(columns: [
-                GridItem(.adaptive(minimum: 110))
-            ], spacing: 10) {
+        ZStack {
+            Color("Teal").ignoresSafeArea(.all)
+            VStack(spacing: 25) {
+                Text("Tell Me More")
+                    .font(Font.custom("BPreplay-Bold", size: 40))
+                    .foregroundStyle(.white)
                 
-                ForEach(ActivityTypes.all, id: \.self) { type in
-                    typeChip(type)
+                Text("Activity Type")
+                    .font(Font.custom("BPreplay", size: 30))                .foregroundStyle(.white)
+                
+                LazyVGrid(columns: [
+                    GridItem(.adaptive(minimum: 150))
+                ], spacing: 10) {
+                    
+                    ForEach(ActivityTypes.all, id: \.self) { type in
+                        typeChip(type)
+                        
+                    }
+                }
+                
+                NavigationLink(destination: Results()) {
+                    Text("See Results")
+                        .font(Font.custom("BPreplay-Bold", size: 25))
+                        .frame(width: 250)
+                        .padding()
+                        .background(Color.teal2.opacity(0.3))
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
                 }
             }
-            
-            
-            Spacer()
-            
-            NavigationLink(destination: Results()) {
-                Text("See Results")
-                    .frame(width: 180)
-                    .padding()
-                    .background(Color.pink.opacity(0.3))
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-            }
+            .padding()
         }
-        .padding()
     }
     
     func typeChip(_ type: String) -> some View {
@@ -49,24 +51,42 @@ struct Tellmemore: View {
             toggleType(type)
         }) {
             Text(type)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 12)
-                .background(
-                    appState.state.selectedTypes.contains(type)
-                    ? Color.pink
-                    : Color.gray.opacity(0.3)
-                )
-                .foregroundColor(.white)
-                .cornerRadius(10)
+                .font(Font.custom("BPreplay", size: 18))
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, minHeight: 30)
+                .modifier(ChipStyle(
+                    isSelected: appState.state.selectedTypes.contains(type)
+                ))
         }
     }
-    
     func toggleType(_ type: String) {
         if appState.state.selectedTypes.contains(type) {
             appState.state.selectedTypes.remove(type)
         } else {
             appState.state.selectedTypes.insert(type)
         }
+    }
+}
+
+struct ChipStyle: ViewModifier {
+    var isSelected: Bool
+    
+    func body(content: Content) -> some View {
+        content
+            .font(Font.custom("BPreplay", size: 18))
+            .lineLimit(1)
+            .minimumScaleFactor(0.9)
+            .padding(.vertical, 15)
+            .padding(.horizontal, 25)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(isSelected ? Color.teal2 : Color.teal2.opacity(0.25))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.white.opacity(0.2), lineWidth: 0)
+            )
+            .foregroundColor(.white)
     }
 }
 #Preview {

@@ -26,25 +26,31 @@ struct Where: View {
             ScrollView {
                 VStack(spacing: 20) {
                     Text("Where?")
-                        .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
+                        .font(Font.custom("BPreplay-Bold", size: 45))
+                        .foregroundStyle(.white)
                   
                     VStack(spacing: 10) {
                         Text("Weather")
-                            .font(Font.custom("Bodoni 72 Oldstyle", size: 20))
+                            .font(Font.custom("BPreplay-Bold", size: 20))
+                            .foregroundStyle(.white)
                         if weatherManager.temperature != 0 {
                             Text("\(weatherEmoji()) \(Int(weatherManager.temperature))°F")
-                                .font(.custom("Bodoni 72 Oldstyle", size: 30))
+                                .font(.custom("BPreplay-Bold", size: 30))
+                                .foregroundStyle(.white)
                         } else {
                             Text("Loading weather...")
-                                .foregroundColor(.gray)
+                                .font(.custom("BPreplay", size: 20))
+                                .foregroundColor(.white)
                         }
                     }
                 
                     VStack(spacing: 4) {
                         Text("Season")
-                            .font(Font.custom("Bodoni 72 Oldstyle", size: 20))
+                            .font(Font.custom("BPreplay-Bold", size: 20))
+                            .foregroundStyle(.white)
                         Text(appState.state.currentSeason.rawValue.capitalized)
-                            .font(.custom("Bodoni 72 Oldstyle", size: 25))
+                            .font(.custom("BPreplay", size: 25))
+                            .foregroundStyle(.white)
                             
                         
                     }
@@ -58,28 +64,33 @@ struct Where: View {
                             
                             Text("Outdoor").tag(LocationRequirement.outdoor)
                         }
-                        .font((Font.custom("Bodoni 72 Oldstyle", size: 20)))
+                        .font((Font.custom("BPreplay", size: 20)))
                         .pickerStyle (.segmented)
                         .frame(width: 260, height: 40)
                     }
                     
                     VStack(spacing: 8) {
                         Text("Location")
-                            .font(Font.custom("Bodoni 72 Oldstyle", size: 20))
+                            .font(Font.custom("BPreplay-Bold", size: 20))
+                            .foregroundStyle(.white)
                         
                         if locationManager.city != "" {
                             
                             Text("\(locationManager.city), \(locationManager.zip)")
-                                .font(.custom("Bodoni 72 Oldstyle", size: 30))
+                                .font(.custom("BPreplay", size: 30))
+                                .foregroundStyle(.white)
                             
                         } else {
                             Text("Fetching location...")
-                                .foregroundColor(.gray)
+                                .font(.custom("BPreplay", size: 20))
+                                .foregroundColor(.white)
                         }
                     }
                     
                     VStack(spacing: 8) {
                         Text("Radius")
+                            .font(.custom("BPreplay-bold", size: 20))
+                            .foregroundStyle(.white)
 
                         Picker("Radius", selection: $radius) {
                             Text("2 mi").tag(2.0)
@@ -107,7 +118,7 @@ struct Where: View {
                                     center: location,
                                     radius: radius * 1609.34
                                 )
-                                .foregroundStyle(.pink.opacity(0.1))
+                                .foregroundStyle(.teal2.opacity(0.3))
                             }
                             .onAppear {
                                 updateCamera()
@@ -135,9 +146,10 @@ struct Where: View {
                         
                         } else {
                             ZStack {
-                                Color.pink.opacity(0.1)
+                                Color.teal2.opacity(0.1)
                                 Text("Loading map...")
-                                    .foregroundStyle(.secondary)
+                                    .font(.custom("BPreplay", size: 20))
+                                    .foregroundStyle(.white)
                             }
                             .frame(height: 300)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -148,7 +160,7 @@ struct Where: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(
                         RoundedRectangle(cornerRadius: 25)
-                            .stroke(Color(.pink.opacity(0.4)), lineWidth: 10)
+                            .stroke(Color(.teal2.opacity(0.4)), lineWidth: 10)
                         )
                     .onChange(of: radius) {
                         updateCamera()
@@ -163,9 +175,9 @@ struct Where: View {
                     NavigationLink(destination: Tellmemore()) {
                         Text("Next")
                             .frame(width: 100)
-                            .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
+                            .font(Font.custom("BPreplay-Bold", size: 45))
                             .padding()
-                            .background(Color(.pink.opacity(0.3)))
+                            .background(Color(.teal2))
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
@@ -175,7 +187,8 @@ struct Where: View {
                 }
             }
             .navigationViewStyle(.stack)
-            .padding(.bottom, 40)
+           // .padding(.bottom, 40)
+            .background(Color("Teal"))
         }
     }
     

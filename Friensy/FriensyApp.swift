@@ -10,6 +10,26 @@ import SwiftUI
 @main
 struct FriensyApp: App {
     @StateObject var appState = AppStateManager()
+    
+    init() {
+        let normalFont = UIFont(name: "BPreplay", size: 15)!
+        let selectedFont = UIFont(name: "BPreplay-Bold", size: 15)!
+        
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("Teal2"))
+        
+        UISegmentedControl.appearance().backgroundColor =
+        UIColor(Color("Teal2").opacity(0.3))
+        
+        UISegmentedControl.appearance().setTitleTextAttributes([
+            .font: normalFont,
+            .foregroundColor: UIColor.white
+        ], for: .normal)
+
+        UISegmentedControl.appearance().setTitleTextAttributes([
+            .font: selectedFont,
+            .foregroundColor: UIColor.white
+        ], for: .selected)
+    }
 
     var body: some Scene {
         WindowGroup {

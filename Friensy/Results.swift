@@ -15,43 +15,74 @@ struct Results: View {
     }
     
     var body: some View {
-        
-        VStack {
-            
-            Text("Your Ideas")
-                .font(Font.custom("Bodoni 72 Oldstyle", size: 35))
-            
-            if ideas.isEmpty {
-                Text("No matches — try different settings")
+        ZStack {
+            Color("Teal").ignoresSafeArea(.all)
+            VStack {
+                Text("Your Ideas:")
+                    .foregroundStyle(.white)
+                    .font(Font.custom("BPreplay", size: 35))
                 
-            } else {
-                
-                List(ideas, id: \.name) { activity in
+                if ideas.isEmpty {
+                    Text("No matches — try different settings")
                     
-                    NavigationLink(
-                        destination: ActivityDetailView(
-                        appState: appState,
-                        activity: activity
-                        )
-                    ){
-                        VStack(alignment: .leading) {
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 0) {
                             
-                            Text(activity.name)
-                                .font(Font.custom("Bodoni 72 Oldstyle", size: 25))
-                            
-                            HStack {
-                                Text(activity.energyLevel.emoji)
-                                Text(activity.priceLevel.display)
+                            ForEach(ideas, id: \.name) { activity in
                                 
-                                if activity.requiresFocus {
-                                    Text("🧠")
+                                NavigationLink(
+                                    destination: ActivityDetailView(
+                                        appState: appState,
+                                        activity: activity
+                                    )
+                                ) {
+                                    HStack {
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text(activity.name)
+                                                .font(Font.custom("BPreplay", size: 25))
+                                                .foregroundStyle(.white)
+                                            
+                                            HStack {
+                                                Text(activity.energyLevel.emoji)
+                                                    .font(Font.custom("BPreplay", size: 22))
+                                                    .foregroundStyle(.white)
+                                                Text(activity.priceLevel.display)
+                                                    .font(Font.custom("BPreplay", size: 22))
+                                                    .foregroundStyle(.white)
+                                                
+                                                if activity.requiresFocus {
+                                                    Text("🧠")
+                                                        .font(Font.custom("BPreplay", size: 22))
+                                                        .foregroundStyle(.white)
+                                                }
+                                            }
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "chevron.right")
+                                            .foregroundStyle(.white)
+                                            .font(.system(size: 14, weight: .semibold))
+                                    }
+                                    .padding()
                                 }
+                                
+                                Divider()
+                                    .padding(.leading)
                             }
                         }
                     }
                 }
-                .listStyle(.plain)
             }
         }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        Results()
+            .environmentObject(AppStateManager())
     }
 }

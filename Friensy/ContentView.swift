@@ -19,14 +19,12 @@ struct ContentView: View {
                 VStack {
                     Image("main2")
                         .resizable().scaledToFit().frame(width: 350, height: 300)
-                   // Text("Friendzy")
-                       // .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
                     NavigationLink(destination: WhosComing()) {
                         Text("Plan")
                             .frame(width: 100)
-                            .font(Font.custom("Bodoni 72 Oldstyle", size: 45))
+                            .font(Font.custom("BPreplay-Bold", size: 45))
                             .padding()
-                            .background(Color("OurYellow"))
+                            .background(Color("Teal2"))
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
