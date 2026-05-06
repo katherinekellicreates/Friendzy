@@ -106,10 +106,9 @@ struct ActivityDetailView: View {
                     }
                     .onChange(of: radius) {
                         updateCamera()
-                        performSearch()
-                    }
-                    .onMapCameraChange { context in
-                        mapRegion = context.region
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                               performSearch()
+                           }
                     }
                     .onMapCameraChange { context in
                         mapRegion = context.region
@@ -204,7 +203,17 @@ struct ActivityDetailView: View {
             
             let request = MKLocalSearch.Request()
             request.naturalLanguageQuery = query
-            request.region = mapRegion
+            if let userLoc = locationManager.userLocation {
+                let bigSpan = MKCoordinateSpan(
+                    latitudeDelta: (25 * 1609.34) / 111000,
+                    longitudeDelta: (25 * 1609.34) / 111000
+                )
+                
+                request.region = MKCoordinateRegion(
+                    center: userLoc,
+                    span: bigSpan
+                )
+            }
             
             let search = MKLocalSearch(request: request)
             
@@ -229,8 +238,6 @@ struct ActivityDetailView: View {
                     uniqueItems.append(item)
                 }
             }
-            
-            let maxDistance = radius * 1609.34 // miles → meters
             
             let selectedRadiusMeters = radius * 1609.34
             let maxRadiusMeters = 25 * 1609.34
