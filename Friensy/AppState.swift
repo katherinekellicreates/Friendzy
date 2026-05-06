@@ -30,4 +30,7 @@ struct AppState {
     var city: String = ""
     var zip: String = ""
     
+    var ideas: [String] = []
+
+    
 }

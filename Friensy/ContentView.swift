@@ -12,13 +12,21 @@ struct ContentView: View {
     
     @EnvironmentObject var appState: AppStateManager
     
+    @State private var devTapCount = 0
+    @State private var showDevMode = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("Teal").ignoresSafeArea(.all)
+                
                 VStack {
+                    
                     Image("main2")
-                        .resizable().scaledToFit().frame(width: 350, height: 300)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 350, height: 300)
+                    
                     NavigationLink(destination: WhosComing()) {
                         Text("Plan")
                             .frame(width: 100)
@@ -28,12 +36,56 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
-                    .simultaneousGesture(TapGesture().onEnded { withAnimation(.none) {} })
+                    
+                    NavigationLink(destination: IdeaInputView()) {
+                        Text("Suggestions")
+                            .frame(width: 170)
+                            .font(Font.custom("BPreplay-Bold", size: 30))
+                            .padding()
+                            .background(Color("Teal2"))
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    
                     Spacer()
                 }
                 .padding()
+                
+                // (top-right corner)
+                VStack {
+                    HStack {
+                        Spacer()
+                        
+                        Rectangle()
+                            .fill(Color.clear)
+                            .frame(width: 80, height: 80)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                devTapCount += 1
+                                
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    devTapCount = 0
+                                }
+                                
+                                
+                                if devTapCount >= 3 {
+                                    showDevMode = true
+                                    devTapCount = 0
+                                }
+                            }
+                    }
+                    Spacer()
+                }
             }
-            .navigationViewStyle(.stack)
+        }
+        
+        
+        .sheet(isPresented: $showDevMode) {
+            NavigationStack {
+                DebugIdeasView()
+            }
+            .environmentObject(appState)
         }
     }
 }
