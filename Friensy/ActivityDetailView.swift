@@ -105,6 +105,7 @@ struct ActivityDetailView: View {
                     }
                     .onChange(of: radius) {
                         updateCamera()
+                        performSearch()
                     }
                     .onMapCameraChange { context in
                         mapRegion = context.region
@@ -129,7 +130,7 @@ struct ActivityDetailView: View {
                             .padding(.horizontal)
                         
                         if places.isEmpty {
-                            Text("No locations found")
+                            Text("No locations found within \(Int(radius)) miles")
                                 .foregroundColor(.gray)
                                 .padding(.horizontal)
                         } else {
