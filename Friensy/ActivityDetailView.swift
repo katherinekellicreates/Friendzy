@@ -204,7 +204,6 @@ struct ActivityDetailView: View {
             
             let userLoc = locationManager.userLocation
             
-            // Remove duplicates
             var uniqueItems: [MKMapItem] = []
             var seenNames: Set<String> = []
             
@@ -215,23 +214,22 @@ struct ActivityDetailView: View {
                 }
             }
             
-            // Convert to Place + calculate distance
-            places = uniqueItems.map { item in
-                var place = Place(mapItem: item)
+            let maxDistance = radius * 1609.34 // miles → meters
+
+            places = uniqueItems.compactMap { item in
+                guard let userLoc = userLoc,
+                      let itemLocation = item.placemark.location else { return nil }
                 
-                if let userLoc = userLoc {
-                    let itemLocation = item.placemark.location
-                    let userCL = CLLocation(latitude: userLoc.latitude, longitude: userLoc.longitude)
-                    
-                    if let itemLocation = itemLocation {
-                        place.distance = userCL.distance(from: itemLocation)
-                    }
+                let userCL = CLLocation(latitude: userLoc.latitude, longitude: userLoc.longitude)
+                let distance = userCL.distance(from: itemLocation)
+
+                if distance <= maxDistance {
+                    return Place(mapItem: item, distance: distance)
+                } else {
+                    return nil
                 }
-                
-                return place
             }
-            
-            // Sort by distance (closest first)
+
             places.sort { $0.distance < $1.distance }
         }
     }
