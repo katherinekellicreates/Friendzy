@@ -78,7 +78,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: false,
-            types: ["Entertainment,Social,Goofy"],
+            types: ["Entertainment","Social","Goofy"],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: true,
@@ -91,7 +91,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: false,
-            types: ["Entertainment, Social, Brain"],
+            types: ["Entertainment", "Social", "Brain"],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: true,
@@ -104,7 +104,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: false,
-            types: ["Goofy,Social,Enertainment"],
+            types: ["Goofy","Social","Enertainment"],
             energyLevel: .low,
             priceLevel: .free,
             requiresFocus: false,
@@ -117,7 +117,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: false,
-            types: ["Experiences,Brain"],
+            types: ["Experiences","Brain"],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: true,
@@ -242,7 +242,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Goofy,Food & Drinks, Social, Artsy/Creativity"],
+            types: ["Goofy","Food & Drinks", "Social", "Artsy/Creativity"],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: false,
@@ -255,7 +255,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .outdoor,
             goOut: true,
-            types: ["Social,Music,Artsy/Creativity"],
+            types: ["Social","Music","Artsy/Creativity"],
             energyLevel: .high,
             priceLevel: .high,
             requiresFocus: true,
@@ -281,7 +281,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .outdoor,
             goOut: true,
-            types: ["Sports & Fitness,Social"],
+            types: ["Sports & Fitness","Social"],
             energyLevel: .medium,
             priceLevel: .high,
             requiresFocus: true,
@@ -333,7 +333,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .outdoor,
             goOut: true,
-            types: ["Food & Drinks, Artsy/Creativity, Social, Adventure, Goofy"],
+            types: ["Food & Drinks", "Artsy/Creativity", "Social", "Adventure", "Goofy"],
             energyLevel: .high,
             priceLevel: .high,
             requiresFocus: true,
@@ -346,7 +346,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .outdoor,
             goOut: true,
-            types: ["Social,Goofy"],
+            types: ["Social","Goofy"],
             energyLevel: .medium,
             priceLevel: .medium,
             requiresFocus: true,
@@ -359,7 +359,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .outdoor,
             goOut: true,
-            types: ["Adventure,Spontaneous,Sports & Fitness"],
+            types: ["Adventure","Spontaneous","Sports & Fitness"],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: true,
@@ -400,12 +400,12 @@ struct ActivityData {
         ),
         
         Activity(
-            name: "Karoake",
+            name: "Karaoke",
             minPeople: 2,
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Social,Music,Goofy"],
+            types: ["Social","Music","Goofy"],
             energyLevel: .medium,
             priceLevel: .high,
             requiresFocus: true,
@@ -451,7 +451,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Experiences, Social, Entertainment"],
+            types: ["Experiences", "Social", "Entertainment"],
             energyLevel: .medium,
             priceLevel: .medium,
             requiresFocus: true,
@@ -464,7 +464,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Experiences,Artsy/Creativity"],
+            types: ["Experiences","Artsy/Creativity"],
             energyLevel: .medium,
             priceLevel: .medium,
             requiresFocus: true,
@@ -477,7 +477,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Adventure,Artys/Creativity"],
+            types: ["Adventure","Artys/Creativity"],
             energyLevel: .medium,
             priceLevel: .high,
             requiresFocus: true,
@@ -490,7 +490,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Social,Music,Artsy/Creativity"],
+            types: ["Social","Music","Artsy/Creativity"],
             energyLevel: .high,
             priceLevel: .high,
             requiresFocus: true,
@@ -503,7 +503,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Sports & Fitness, Social"],
+            types: ["Sports & Fitness", "Social"],
             energyLevel: .medium,
             priceLevel: .high,
             requiresFocus: true,
@@ -516,7 +516,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Experiences,Adventure,Sports & Fitness"],
+            types: ["Experiences","Adventure","Sports & Fitness"],
             energyLevel: .high,
             priceLevel: .medium,
             requiresFocus: true,
@@ -568,7 +568,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: ["Experiences,food & Drinks"],
+            types: ["Experiences","food & Drinks"],
             energyLevel: .low,
             priceLevel: .medium,
             requiresFocus: true,
@@ -610,34 +610,20 @@ struct ActivityData {
         
         for activity in allActivities {
             
-            var score = 0
             
-            //season filter
-            if !activity.seasons.contains(state.currentSeason) {
-                continue
-            }
             
-            // group size
-            if state.number < activity.minPeople {
-                continue
-            }
-            
-            // date
-            if state.isDate && !activity.isDate {
-                continue
-            }
-            
-            // stay in vs go out
-            if activity.goOut != state.goOut {
-                continue
-            }
-
             if state.goOut {
                 if activity.locationRequirement != state.selectedLocation &&
                     activity.locationRequirement != .flexible {
                     continue
                 }
             }
+            guard activity.seasons.contains(state.currentSeason) else { continue }
+            guard state.number >= activity.minPeople else { continue }
+            guard !state.isDate || activity.isDate else { continue }
+            guard activity.goOut == state.goOut else { continue }
+            
+            var score = 0
             var typeMatch = false
 
             for type in state.selectedTypes {
@@ -649,7 +635,7 @@ struct ActivityData {
 
             // small penalty if user selected types but this doesn't match
             if !state.selectedTypes.isEmpty && !typeMatch {
-                score -= 0 //1 once have more activites
+                score -= 2 //1 once have more activites
             }
 
             
