@@ -277,6 +277,8 @@ struct ActivityDetailView: View {
             return ["thrift store", "Goodwill", "Salvation Army", "House of Hope"]
         case "Go To a Sports Game":
             return ["sports", "stadium", "arena"]
+        case "Bookstore Shopping":
+            return ["bookstore", "bookshop", "Barnes & Noble", "book store", "book shop", "book"]
         default:
             return [activity.name]
         }
