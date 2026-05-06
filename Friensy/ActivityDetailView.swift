@@ -178,49 +178,84 @@ struct ActivityDetailView: View {
     }
     
     func performSearch() {
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = searchQueryForActivity()
-        request.region = mapRegion
-        let search = MKLocalSearch(request: request)
-        search.start { response, _ in
-            guard let response = response else { return }
+        let queries = searchQueriesForActivity()
+        
+        var allResults: [MKMapItem] = []
+        let group = DispatchGroup()
+        
+        for query in queries {
+            group.enter()
+            
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = query
+            request.region = mapRegion
+            
+            let search = MKLocalSearch(request: request)
+            
+            search.start { response, _ in
+                if let items = response?.mapItems {
+                    allResults.append(contentsOf: items)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
             
             let userLoc = locationManager.userLocation
             
-            places = response.mapItems.map { item in
-                
-                var place = Place(mapItem: item)
-                if let userLoc = userLoc,
-                   let itemLocation = item.placemark.location {
-                    
-                    let userCL = CLLocation(
-                        latitude: userLoc.latitude,
-                        longitude: userLoc.longitude
-                    )
-                    place.distance = itemLocation.distance(from: userCL)
+            // Remove duplicates
+            var uniqueItems: [MKMapItem] = []
+            var seenNames: Set<String> = []
+            
+            for item in allResults {
+                if let name = item.name, !seenNames.contains(name) {
+                    seenNames.insert(name)
+                    uniqueItems.append(item)
                 }
+            }
+            
+            // Convert to Place + calculate distance
+            places = uniqueItems.map { item in
+                var place = Place(mapItem: item)
+                
+                if let userLoc = userLoc {
+                    let itemLocation = item.placemark.location
+                    let userCL = CLLocation(latitude: userLoc.latitude, longitude: userLoc.longitude)
+                    
+                    if let itemLocation = itemLocation {
+                        place.distance = userCL.distance(from: itemLocation)
+                    }
+                }
+                
                 return place
             }
+            
+            // Sort by distance (closest first)
             places.sort { $0.distance < $1.distance }
         }
     }
     
-    func searchQueryForActivity() -> String {
+    func searchQueriesForActivity() -> [String] {
         switch activity.name {
         case "Escape room":
-            return "escape room"
+            return ["escape room", "puzzle room"]
         case "Bowling":
-            return "bowling alley"
+            return ["bowling alley", "bowling"]
         case "Arcade":
-            return "arcade"
+            return ["arcade", "game center"]
         case "Mini golf":
-            return "mini golf"
+            return ["mini golf"]
         case "Amusement Park":
-            return "amusement park"
+            return ["amusement park", "theme park"]
         case "Hiking":
-            return "hiking trail"
+            return ["hiking trail", "nature preserve"]
+        case "Thrifting":
+            return ["thrift store", "Goodwill", "Salvation Army", "House of Hope"]
+        case "Go To a Sports Game":
+            return ["sports", "stadium", "arena"]
         default:
-            return activity.name
+            return [activity.name]
         }
     }
     
