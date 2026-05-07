@@ -21,9 +21,14 @@ struct Results: View {
                 Text("Your Ideas:")
                     .foregroundStyle(.white)
                     .font(Font.custom("BPreplay", size: 35))
-                
+                Text("\(ideas.count) ways to spend your day!")
+                       .foregroundStyle(.white.opacity(0.8))
+                       .font(Font.custom("BPreplay", size: 20))
                 if ideas.isEmpty {
                     Text("No matches — try different settings")
+                        .foregroundStyle(.white.opacity(0.8))
+                        .font(Font.custom("BPreplay", size: 20))
+
                     
                 } else {
                     ScrollView {
