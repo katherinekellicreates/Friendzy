@@ -7,37 +7,31 @@
 
 import Foundation
 
-struct ActivityTypes {
+enum ActivityType: String, CaseIterable {
     
-    static let sports = "Sports & Fitness"
-    static let creativity = "Creativity"
-    static let productive = "Study/Productive"
-    static let entertainment = "Entertainment"
-    static let gaming = "Gaming"
-    static let music = "Music"
-    static let experiences = "Experiences"
-    static let silly = "Silly"
-    static let fun = "Fun"
-    static let food = "Food & Drinks"
-    static let spontaneous = "Spontaneous"
-    static let social = "Social"
-    static let chill = "Chill"
-    static let digital = "Digital"
+    //vibes
+    case social = "Social"
+    case chill = "Chill"
+    case silly = "Silly"
+    case creative = "Creative"
+    case competitive = "Competitive"
+    case adventurous = "Adventurous"
+    case active = "Active"
+    case problemsolving = "Problem Solving"
     
-    static let all: [String] = [
-        sports,
-        creativity,
-        productive,
-        entertainment,
-        gaming,
-        music,
-        experiences,
-        silly,
-        fun,
-        food,
-        spontaneous,
-        social,
-        chill,
-        digital
-    ]
+    //category
+    case entertainment = "Entertainment"
+    case gaming = "Gaming"
+    case music = "Music"
+    case experiences = "Experiences"
+    case sports = "Sports"
+    case productive = "Productive"
+    case learning = "Learning"
+    case food = "Food & Drinks"
+    case shopping = "Shopping"
+    
+    //other
+    case spontaneous = "Spontaneous"
+    case digital = "Digital"
+    
 }

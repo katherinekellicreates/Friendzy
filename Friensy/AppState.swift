@@ -22,7 +22,7 @@ struct AppState {
     var weather: String = "☀️"
     
     //tell me more
-    var selectedTypes: Set<String> = []
+    var selectedTypes: Set<ActivityType> = []
     
     //season
     var latitude: Double = 0

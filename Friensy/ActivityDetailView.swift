@@ -377,7 +377,7 @@ struct ActivityDetailView: View {
                 isDate: true,
                 locationRequirement: .indoor,
                 goOut: true,
-                types: ["Experiences"],
+                types: [.experiences,.problemsolving,.social],
                 energyLevel: .medium,
                 priceLevel: .medium,
                 requiresFocus: true,
