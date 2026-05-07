@@ -320,7 +320,7 @@ struct ActivityDetailView: View {
         func updateCamera() {
             if let location = locationManager.userLocation {
                 
-                let distance = radius * 1609.34
+                let distance = radius * 1609.34 * 2.4
                 
                 startPosition = .region(
                     MKCoordinateRegion(

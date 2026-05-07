@@ -195,7 +195,7 @@ struct Where: View {
     func updateCamera() {
         if let location = locationManager.userLocation {
             
-            let distance = radius * 1609.34  // miles → meters
+            let distance = radius * 1609.34 * 2.4
             
             startPosition = .region(
                 MKCoordinateRegion(
