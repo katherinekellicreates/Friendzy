@@ -391,7 +391,7 @@ struct ActivityData {
             minPeople: 2,
             isDate: true,
             locationRequirement: .indoor,
-            goOut: true,
+            goOut: false,
             types: ["Social","Music","Goofy"],
             energyLevel: .medium,
             priceLevel: .high,

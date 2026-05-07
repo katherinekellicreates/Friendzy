@@ -292,7 +292,7 @@ struct ActivityDetailView: View {
             case "Escape room":
                 return ["escape room", "puzzle room"]
             case "Bowling":
-                return ["bowling alley", "bowling"]
+                return ["bowling alley", "bowling", "lanes"]
             case "Arcade":
                 return ["arcade", "game center"]
             case "Mini golf":
