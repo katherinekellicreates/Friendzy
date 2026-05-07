@@ -112,10 +112,23 @@ struct ActivityDetailView: View {
                             }
                         }
                         .onAppear {
-                            startPosition = .userLocation(fallback: .automatic)
-                            updateCamera()
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            if let location = locationManager.userLocation {
+                                
+                                let expandedDistance = radius * 1609.34 * 2.3
+                                
+                                startPosition = .region(
+                                    MKCoordinateRegion(
+                                        center: location,
+                                        span: MKCoordinateSpan(
+                                            latitudeDelta: expandedDistance / 111000,
+                                            longitudeDelta: expandedDistance / 111000
+                                        )
+                                    )
+                                )
+                            }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 performSearch()
                             }
                         }
