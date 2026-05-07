@@ -118,7 +118,7 @@ struct Where: View {
                                     center: location,
                                     radius: radius * 1609.34
                                 )
-                                .foregroundStyle(.teal2.opacity(0.3))
+                                .foregroundStyle(.ourYellow.opacity(0.3))
                             }
                             .onAppear {
                                 updateCamera()
@@ -160,7 +160,7 @@ struct Where: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(
                         RoundedRectangle(cornerRadius: 25)
-                            .stroke(Color(.teal2.opacity(0.4)), lineWidth: 10)
+                            .stroke(Color(.ourYellow.opacity(0.8)), lineWidth: 10)
                         )
                     .onChange(of: radius) {
                         updateCamera()
@@ -177,8 +177,8 @@ struct Where: View {
                             .frame(width: 100)
                             .font(Font.custom("BPreplay-Bold", size: 45))
                             .padding()
-                            .background(Color(.teal2))
-                            .foregroundStyle(.white)
+                            .background(Color(.ourYellow))
+                            .foregroundStyle(.teal)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                     .padding(.top, 20)

@@ -79,7 +79,7 @@ struct WhosComing: View {
                             
                             
                             Toggle("", isOn: $appState.state.goOut)
-                                .tint(.teal2)
+                                .tint(.switch)
                                 .frame(width: 60)
                             
                             Text("Go Out")
@@ -114,8 +114,8 @@ struct WhosComing: View {
                 .frame(width: 100)
                 .font(Font.custom("BPreplay-bold", size: 45))
                 .padding()
-                .background(Color("Teal2"))
-                .foregroundStyle(.white)
+                .background(Color("OurYellow"))
+                .foregroundStyle(.teal)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         }
     }

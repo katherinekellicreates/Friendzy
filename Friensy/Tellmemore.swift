@@ -37,8 +37,8 @@ struct Tellmemore: View {
                         .font(Font.custom("BPreplay-Bold", size: 25))
                         .frame(width: 250)
                         .padding()
-                        .background(Color.teal2.opacity(0.3))
-                        .foregroundColor(.white)
+                        .background(Color.ourYellow)
+                        .foregroundColor(.teal)
                         .cornerRadius(12)
                 }
             }
@@ -80,13 +80,13 @@ struct ChipStyle: ViewModifier {
             .padding(.horizontal, 25)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(isSelected ? Color.teal2 : Color.teal2.opacity(0.25))
+                    .fill(isSelected ? Color.ourYellow : Color.teal2.opacity(0.25))
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.white.opacity(0.2), lineWidth: 0)
             )
-            .foregroundColor(.white)
+            .foregroundColor(isSelected ? .teal : .white)
     }
 }
 #Preview {

@@ -15,10 +15,10 @@ struct FriensyApp: App {
         let normalFont = UIFont(name: "BPreplay", size: 15)!
         let selectedFont = UIFont(name: "BPreplay-Bold", size: 15)!
         
-        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("Teal2"))
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("OurYellow"))
         
-        UISegmentedControl.appearance().backgroundColor =
-        UIColor(Color("Teal2").opacity(0.3))
+       // UISegmentedControl.appearance().backgroundColor =
+        //UIColor(Color("Teal").opacity(0.3))
         
         UISegmentedControl.appearance().setTitleTextAttributes([
             .font: normalFont,
@@ -27,7 +27,7 @@ struct FriensyApp: App {
 
         UISegmentedControl.appearance().setTitleTextAttributes([
             .font: selectedFont,
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.teal
         ], for: .selected)
     }
 
