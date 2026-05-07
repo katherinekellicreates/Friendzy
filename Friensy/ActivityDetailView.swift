@@ -309,6 +309,9 @@ struct ActivityDetailView: View {
                 return ["bookstore", "bookshop", "Barnes & Noble", "book store", "book shop", "book"]
             case "Coffee Run":
                 return ["coffee", "Starbucks", "Dunkin Donuts", "coffee shop", "cafe"]
+// TEMPLATE!
+//            case "EXACT Activity Name":
+//                return ["EXACT Activity Name", "another search term", "another search term", "etc", "add as many search terms as need be!"]
             default:
                 return [activity.name]
             }
