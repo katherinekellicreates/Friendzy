@@ -101,7 +101,8 @@ struct Where: View {
                             Text("25+ mi").tag(25.0)
                         }
                         .pickerStyle(.segmented)
-                        .scaleEffect(0.9)
+                        .scaleEffect(1.15)
+                        .font(.headline)
                     }
                     .padding()
                     
@@ -118,7 +119,7 @@ struct Where: View {
                                     center: location,
                                     radius: radius * 1609.34
                                 )
-                                .foregroundStyle(.ourYellow.opacity(0.3))
+                                .foregroundStyle(.ourYellow.opacity(0.45))
                             }
                             .onAppear {
                                 updateCamera()
@@ -195,7 +196,7 @@ struct Where: View {
     func updateCamera() {
         if let location = locationManager.userLocation {
             
-            let distance = radius * 1609.34 * 2.4
+            let distance = radius * 1609.34 * 2.2
             
             startPosition = .region(
                 MKCoordinateRegion(

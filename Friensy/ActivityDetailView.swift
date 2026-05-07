@@ -73,7 +73,8 @@ struct ActivityDetailView: View {
                                 Text("25+ mi").tag(25.0)
                             }
                             .pickerStyle(.segmented)
-                            .scaleEffect(0.9)
+                            .scaleEffect(1.15)
+                            .font(.headline)
                         }
                         .padding()
                         
@@ -85,7 +86,7 @@ struct ActivityDetailView: View {
                                     center: location,
                                     radius: radius * 1609.34
                                 )
-                                .foregroundStyle(.teal2.opacity(0.15))
+                                .foregroundStyle(.teal2.opacity(0.25))
                             }
                             
                             ForEach(places) { place in
@@ -98,7 +99,7 @@ struct ActivityDetailView: View {
                                     ) {
                                         VStack {
                                             Text("⭐️")
-                                                .font(.system(size: 45))
+                                                .font(.system(size: 35))
                                             
                                             Text(place.mapItem.name ?? "")
                                                 .font(Font.custom("BPreplay-Bold", size: 20))
@@ -197,6 +198,9 @@ struct ActivityDetailView: View {
                                             Spacer()
                                         }
                                         .padding(.horizontal)
+                                    }
+                                    Button("Increase Radius") {
+                                        increaseRadius()
                                     }
                                 }
                             }
@@ -320,7 +324,7 @@ struct ActivityDetailView: View {
         func updateCamera() {
             if let location = locationManager.userLocation {
                 
-                let distance = radius * 1609.34 * 2.4
+                let distance = radius * 1609.34 * 2.2
                 
                 startPosition = .region(
                     MKCoordinateRegion(
