@@ -103,6 +103,8 @@ struct Where: View {
                         .pickerStyle(.segmented)
                         .scaleEffect(1.15)
                         .font(.headline)
+                        .frame(height: 50)
+                        .padding(.horizontal)
 
                     }
                     .padding()

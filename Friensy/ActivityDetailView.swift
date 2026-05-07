@@ -75,79 +75,83 @@ struct ActivityDetailView: View {
                             .pickerStyle(.segmented)
                             .scaleEffect(1.15)
                             .font(.headline)
+                            .frame(height: 50)
+                            .padding(.horizontal)
                         }
                         .padding()
                         
-                        Map(position: $startPosition) {
-                            UserAnnotation()
+                        Group {
                             
                             if let location = locationManager.userLocation {
-                                MapCircle(
-                                    center: location,
-                                    radius: radius * 1609.34
-                                )
-                                .foregroundStyle(.teal2.opacity(0.25))
-                            }
-                            
-                            ForEach(places) { place in
-                                Annotation(
-                                    place.mapItem.name ?? "",
-                                    coordinate: place.mapItem.placemark.coordinate
-                                ) {
-                                    NavigationLink(
-                                        destination: PlaceDetails(mapItem: place.mapItem)
-                                    ) {
-                                        VStack {
-                                            Text("⭐️")
-                                                .font(.system(size: 35))
-                                            
-                                            Text(place.mapItem.name ?? "")
-                                                .font(Font.custom("BPreplay-Bold", size: 20))
-                                                .font(.caption)
-                                                .foregroundColor(.white)
-                                                .lineLimit(1)
+                                
+                                Map(position: $startPosition) {
+                                    
+                                    UserAnnotation()
+                                    
+                                    MapCircle(
+                                        center: location,
+                                        radius: radius * 1609.34
+                                    )
+                                    .foregroundStyle(.ourYellow.opacity(0.45))
+                                    
+                                    ForEach(places) { place in
+                                        Annotation(
+                                            place.mapItem.name ?? "",
+                                            coordinate: place.mapItem.placemark.coordinate
+                                        ) {
+                                            NavigationLink(
+                                                destination: PlaceDetails(mapItem: place.mapItem)
+                                            ) {
+                                                VStack {
+                                                    
+                                                    Text("⭐️")
+                                                        .font(.system(size: 27))
+                                                    
+                                                    Text(place.mapItem.name ?? "")
+                                                        .font(Font.custom("BPreplay-Bold", size: 9))
+                                                        .foregroundColor(.teal2)
+                                                        .lineLimit(1)
+                                                }
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        }
-                        .onAppear {
-                            
-                            if let location = locationManager.userLocation {
+                                .onAppear {
+                                    
+                                    updateCamera()
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        performSearch()
+                                    }
+                                }
+                                .onChange(of: radius) {
+                                    updateCamera()
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        performSearch()
+                                    }
+                                }
+                                .onMapCameraChange { context in
+                                    mapRegion = context.region
+                                }
                                 
-                                let expandedDistance = radius * 1609.34 * 2.3
+                            } else {
                                 
-                                startPosition = .region(
-                                    MKCoordinateRegion(
-                                        center: location,
-                                        span: MKCoordinateSpan(
-                                            latitudeDelta: expandedDistance / 111000,
-                                            longitudeDelta: expandedDistance / 111000
-                                        )
-                                    )
-                                )
+                                ZStack {
+                                    Color.teal2.opacity(0.1)
+                                    
+                                    Text("Loading map...")
+                                        .font(.custom("BPreplay", size: 20))
+                                        .foregroundStyle(.white)
+                                }
                             }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                performSearch()
-                            }
-                        }
-                        .onChange(of: radius) {
-                            updateCamera()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                performSearch()
-                            }
-                        }
-                        .onMapCameraChange { context in
-                            mapRegion = context.region
                         }
                         .aspectRatio(1, contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .overlay(
                             RoundedRectangle(cornerRadius: 25)
                                 .stroke(Color(.ourYellow.opacity(0.8)), lineWidth: 10)
-                            )
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        )
                         .padding()
                         
                         VStack(alignment: .leading, spacing: 10) {
@@ -222,9 +226,6 @@ struct ActivityDetailView: View {
                     }
                     
                     Spacer()
-                }
-                .onAppear {
-                    startPosition = .userLocation(fallback: .automatic)
                 }
             }
         }
