@@ -73,10 +73,9 @@ struct ActivityDetailView: View {
                                 Text("25+ mi").tag(25.0)
                             }
                             .pickerStyle(.segmented)
-                            .scaleEffect(1.15)
-                            .font(.headline)
-                            .frame(height: 50)
-                            .padding(.horizontal)
+                            .font(.system(size: 16, weight: .bold))
+                            .frame(height: 45)
+                            .padding(.horizontal, 25)
                         }
                         .padding()
                         
