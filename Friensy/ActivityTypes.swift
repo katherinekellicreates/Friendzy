@@ -19,6 +19,9 @@ enum ActivityType: String, CaseIterable {
     case adventurous = "Adventurous"
     case active = "Active"
     case problemsolving = "Problem Solving"
+    case fancy = "Fancy"
+    case romantic = "Romantic"
+    case aesthetic = "Aesthetic"
     
     //category
     case entertainment = "Entertainment"
@@ -35,5 +38,6 @@ enum ActivityType: String, CaseIterable {
     //other
     case spontaneous = "Spontaneous"
     case digital = "Digital"
+    case scenic = "Scenic"
     
 }

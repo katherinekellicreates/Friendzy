@@ -27,8 +27,11 @@ struct Tellmemore: View {
                     ], spacing: 10) {
                         
                         ForEach(ActivityType.allCases, id: \.self) { type in
-                            typeChip(type)
-                            
+                            if type == .romantic && !appState.state.isDate {
+                                EmptyView()
+                            } else {
+                                typeChip(type)
+                            }
                         }
                     }
                     Color("Teal").ignoresSafeArea(.all)

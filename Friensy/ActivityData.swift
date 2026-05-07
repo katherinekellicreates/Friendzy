@@ -99,7 +99,7 @@ struct ActivityData {
         ),
         
         Activity(
-            name: "Binge Night",
+            name: "Binge Watch",
             minPeople: 1,
             isDate: false,
             locationRequirement: .indoor,
@@ -147,6 +147,32 @@ struct ActivityData {
             energyLevel: .low,
             priceLevel: .free,
             requiresFocus: true,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Create a pinterest board together",
+            minPeople: 2,
+            isDate: false,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: [.social,.art,.creative,.digital,.chill,.aesthetic],
+            energyLevel: .low,
+            priceLevel: .free,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Scrapbooking",
+            minPeople: 1,
+            isDate: false,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: [.social,.art,.creative,.aesthetic],
+            energyLevel: .low,
+            priceLevel: .free,
+            requiresFocus: false,
             seasons: [.winter, .spring, .summer, .fall]
         ),
         
@@ -228,6 +254,19 @@ struct ActivityData {
             seasons: [.winter, .spring, .summer, .fall]
             
         ),
+        
+        Activity(
+            name: "Karaoke",
+            minPeople: 2,
+            isDate: false,
+            locationRequirement: .indoor,
+            goOut: false,
+            types: [.social,.music,.fun],
+            energyLevel: .medium,
+            priceLevel: .high,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
         //////////////////////////////////////////////////////////////////////////
         
         
@@ -241,7 +280,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .outdoor,
             goOut: true,
-            types: [.active, .experiences, .adventurous],
+            types: [.active, .experiences, .adventurous,.scenic],
             energyLevel: .high,
             priceLevel: .free,
             requiresFocus: false,
@@ -254,7 +293,7 @@ struct ActivityData {
             isDate: true,
             locationRequirement: .indoor,
             goOut: true,
-            types: [.food, .social],
+            types: [.food, .social,.scenic,.romantic],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: false,
@@ -341,12 +380,38 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "Drive-in Movie",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.chill,.experiences,.entertainment,.aesthetic],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Stargazing",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.chill,.experiences,.romantic,.scenic],
+            energyLevel: .low,
+            priceLevel: .free,
+            requiresFocus: false,
+            seasons: [.spring, .summer]
+        ),
+        
+        Activity(
             name: "Nature Walk",
             minPeople: 1,
             isDate: false,
             locationRequirement: .outdoor,
             goOut: true,
-            types: [.spontaneous,.active,.adventurous],
+            types: [.spontaneous,.active,.adventurous,.scenic],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: false,
@@ -359,13 +424,38 @@ struct ActivityData {
             isDate: false,
             locationRequirement: .outdoor,
             goOut: true,
-            types: [.social,.experiences],
+            types: [.social,.experiences,.scenic],
             energyLevel: .medium,
             priceLevel: .free,
             requiresFocus: false,
             seasons: [.spring, .summer]
         ),
         
+        Activity(
+            name: "Watch the sunset",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.social,.experiences,.romantic,.scenic],
+            energyLevel: .low,
+            priceLevel: .free,
+            requiresFocus: false,
+            seasons: [.spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Water Balloon fight",
+            minPeople: 2,
+            isDate: false,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.experiences,.spontaneous,.active,.fun],
+            energyLevel: .low,
+            priceLevel: .free,
+            requiresFocus: false,
+            seasons: [.spring, .summer]
+        ),
         //////////////////////////////////////////////////////////////////////////
         
        
@@ -386,18 +476,6 @@ struct ActivityData {
             seasons: [.winter, .spring, .summer, .fall]
         ),
         
-        Activity(
-            name: "Karaoke",
-            minPeople: 2,
-            isDate: true,
-            locationRequirement: .indoor,
-            goOut: false,
-            types: [.social,.music,.fun],
-            energyLevel: .medium,
-            priceLevel: .high,
-            requiresFocus: false,
-            seasons: [.winter, .spring, .summer, .fall]
-        ),
         
         Activity(
             name: "Painting",
@@ -416,7 +494,7 @@ struct ActivityData {
             name: "Concert",
             minPeople: 2,
             isDate: false,
-            locationRequirement: .outdoor,
+            locationRequirement: .flexible,
             goOut: true,
             types: [.music,.entertainment,.experiences],
             energyLevel: .high,
@@ -429,7 +507,7 @@ struct ActivityData {
             name: "Go To a Sports Game",
             minPeople: 2,
             isDate: true,
-            locationRequirement: .indoor,
+            locationRequirement: .flexible,
             goOut: true,
             types: [.sports, .social,.entertainment],
             energyLevel: .medium,
@@ -439,17 +517,18 @@ struct ActivityData {
         ),
         
         Activity(
-            name: "Watch the sunset",
+            name: "Rock Climbing",
             minPeople: 2,
             isDate: true,
-            locationRequirement: .indoor,
+            locationRequirement: .flexible,
             goOut: true,
-            types: [.social,.experiences],
-            energyLevel: .low,
-            priceLevel: .free,
+            types: [.adventurous, .social,.active],
+            energyLevel: .medium,
+            priceLevel: .medium,
             requiresFocus: false,
-            seasons: [.spring, .summer, .fall]
+            seasons: [.winter, .spring, .summer, .fall]
         ),
+        
         
         //////////////////////////////////////////////////////////////////////////
         
@@ -485,6 +564,32 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "See a Play",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: [.experiences,.art,.entertainment],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "See a Musical",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: [.experiences,.art,.entertainment,.music],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
             name: "Aquarium",
             minPeople: 2,
             isDate: true,
@@ -498,6 +603,19 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "Pottery",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: [.experiences,.art,.creative],
+            energyLevel: .medium,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
             name: "Workout",
             minPeople: 1,
             isDate: false,
@@ -506,7 +624,20 @@ struct ActivityData {
             types: [.active],
             energyLevel: .high,
             priceLevel: .medium,
-            requiresFocus: true,
+            requiresFocus: false,
+            seasons: [.winter, .spring, .summer, .fall]
+        ),
+        
+        Activity(
+            name: "Trampoline Park",
+            minPeople: 1,
+            isDate: false,
+            locationRequirement: .indoor,
+            goOut: true,
+            types: [.active,.spontaneous,.silly],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: false,
             seasons: [.winter, .spring, .summer, .fall]
         ),
         
@@ -524,7 +655,7 @@ struct ActivityData {
         ),
         
         Activity(
-            name: "Bookstore Shopping",
+            name: "Book Shopping",
             minPeople: 1,
             isDate: true,
             locationRequirement: .indoor,
@@ -620,7 +751,7 @@ struct ActivityData {
             var matchedTypes = 0
 
 
-            // TYPE MATCHING
+          
             for type in state.selectedTypes {
                 if activity.types.contains(type) {
                     matchedTypes += 1
@@ -628,23 +759,23 @@ struct ActivityData {
             }
 
 
-            // BIG reward for matching selected vibes
+            
             score += matchedTypes * 10
 
 
-            // Penalty if nothing matched
+            
             if !state.selectedTypes.isEmpty && matchedTypes == 0 {
                 score -= 15
             }
 
 
-            // Bonus if activity is flexible
+            
             if activity.locationRequirement == .flexible {
                 score += 2
             }
 
 
-            // Better people fit bonus
+            
             let extraPeople = state.number - activity.minPeople
 
             if extraPeople == 0 {
@@ -655,7 +786,7 @@ struct ActivityData {
             }
 
 
-            // Slight bonus for cheaper activities
+           
             switch activity.priceLevel {
             case .free:
                 score += 3
@@ -668,7 +799,7 @@ struct ActivityData {
             }
 
 
-            // Slight bonus for lower energy
+            
             switch activity.energyLevel {
             case .lowest:
                 score += 3
@@ -681,7 +812,7 @@ struct ActivityData {
             }
 
 
-            // Slight penalty for focus-heavy activities
+       
             if activity.requiresFocus {
                 score -= 2
             }
