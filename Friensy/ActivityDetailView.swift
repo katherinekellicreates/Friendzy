@@ -132,8 +132,8 @@ struct ActivityDetailView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .overlay(
                             RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color(.teal2.opacity(0.8)), lineWidth: 10)
-                        )
+                                .stroke(Color(.ourYellow.opacity(0.8)), lineWidth: 10)
+                            )
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .padding()
                         
@@ -199,9 +199,9 @@ struct ActivityDetailView: View {
                                         }
                                         .padding(.horizontal)
                                     }
-                                    Button("Increase Radius") {
-                                        increaseRadius()
-                                    }
+                                }
+                                Button("Increase Radius") {
+                                    increaseRadius()
                                 }
                             }
                         }
@@ -324,7 +324,7 @@ struct ActivityDetailView: View {
         func updateCamera() {
             if let location = locationManager.userLocation {
                 
-                let distance = radius * 1609.34 * 2.2
+                let distance = radius * 1609.34 * 2.1
                 
                 startPosition = .region(
                     MKCoordinateRegion(
