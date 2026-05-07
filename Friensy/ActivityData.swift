@@ -605,27 +605,86 @@ struct ActivityData {
                     continue
                 }
             }
+            
+            if !state.selectedTypes.isEmpty &&
+               state.selectedTypes.allSatisfy({ !activity.types.contains($0) }) {
+                continue
+            }
+            
             guard activity.seasons.contains(state.currentSeason) else { continue }
             guard state.number >= activity.minPeople else { continue }
             guard !state.isDate || activity.isDate else { continue }
             guard activity.goOut == state.goOut else { continue }
             
             var score = 0
-            var typeMatch = false
+            var matchedTypes = 0
 
+
+            // TYPE MATCHING
             for type in state.selectedTypes {
                 if activity.types.contains(type) {
-                    score += 3
-                    typeMatch = true
+                    matchedTypes += 1
                 }
             }
 
-            // small penalty if user selected types but this doesn't match
-            if !state.selectedTypes.isEmpty && !typeMatch {
-                score -= 2 //1 once have more activites
+
+            // BIG reward for matching selected vibes
+            score += matchedTypes * 10
+
+
+            // Penalty if nothing matched
+            if !state.selectedTypes.isEmpty && matchedTypes == 0 {
+                score -= 15
             }
 
-            
+
+            // Bonus if activity is flexible
+            if activity.locationRequirement == .flexible {
+                score += 2
+            }
+
+
+            // Better people fit bonus
+            let extraPeople = state.number - activity.minPeople
+
+            if extraPeople == 0 {
+                score += 4
+            }
+            else if extraPeople <= 2 {
+                score += 2
+            }
+
+
+            // Slight bonus for cheaper activities
+            switch activity.priceLevel {
+            case .free:
+                score += 3
+            case .low:
+                score += 2
+            case .medium:
+                score += 1
+            case .high:
+                score += 0
+            }
+
+
+            // Slight bonus for lower energy
+            switch activity.energyLevel {
+            case .lowest:
+                score += 3
+            case .low:
+                score += 2
+            case .medium:
+                score += 1
+            case .high:
+                score += 0
+            }
+
+
+            // Slight penalty for focus-heavy activities
+            if activity.requiresFocus {
+                score -= 2
+            }
             results.append((activity, score))
         }
         
