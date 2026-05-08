@@ -37,10 +37,12 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                     
+                    Spacer()
+                        .padding()
                     NavigationLink(destination: IdeaInputView()) {
-                        Text("Suggestions")
-                            .frame(width: 170)
-                            .font(Font.custom("BPreplay-Bold", size: 30))
+                        Text("App Suggestions")
+                            .frame(width: 150)
+                            .font(Font.custom("BPreplay-Bold", size: 23))
                             .padding()
                             .background(Color("Teal2"))
                             .foregroundStyle(.white)
