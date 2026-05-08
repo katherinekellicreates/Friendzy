@@ -171,10 +171,12 @@ struct ActivityDetailView: View {
                                             increaseRadius()
                                         }
                                         .font(Font.custom("BPreplay-Bold", size: 20))
-                                        .foregroundColor(.white)
-                                        .padding(8)
-                                        .background(Color.teal2.opacity(0.3))
-                                        .cornerRadius(8)
+                                        .frame(width: 200)
+                                        .padding()
+                                        .background(Color.ourYellow)
+                                        .foregroundColor(.teal)
+                                        .cornerRadius(12)
+                                        .frame(maxWidth: .infinity)
                                     }
                                     
                                 } else {
@@ -213,12 +215,19 @@ struct ActivityDetailView: View {
                                             
                                             Spacer()
                                         }
-                                        .padding(.horizontal)
+                                       .padding(.horizontal)
                                     }
                                 }
                                 Button("Increase Radius") {
                                     increaseRadius()
                                 }
+                                .font(Font.custom("BPreplay-Bold", size: 20))
+                                .frame(width: 200)
+                                .padding()
+                                .background(Color.ourYellow)
+                                .foregroundColor(.teal)
+                                .cornerRadius(12)
+                                .frame(maxWidth: .infinity)
                             }
                         }
                         .padding(.bottom)

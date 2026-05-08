@@ -20,41 +20,59 @@ struct PlaceDetails: View {
             placemark.administrativeArea,
             placemark.postalCode
         ]
-        .compactMap { $0 }
-        .joined(separator: ", ")
-        
-        VStack(spacing: 20) {
+            .compactMap { $0 }
+            .joined(separator: ", ")
+        ZStack {
+            Color("Teal").ignoresSafeArea(.all)
             
-            Text(mapItem.name ?? "Unknown Place")
-                .font(.title)
-                .bold()
-            
-            Text(address)
-                .multilineTextAlignment(.center)
-            
-            if let phone = mapItem.phoneNumber {
-                Text(phone)
-            }
-            
-            if let url = mapItem.url {
-                Link("Website", destination: url)
-            }
-            
-            Button("Open in Maps") {
-                let coordinate = placemark.coordinate
-                let url = URL(string: "maps://?daddr=\(coordinate.latitude),\(coordinate.longitude)")
+            VStack(spacing: 20) {
                 
-                if let url = url {
-                    UIApplication.shared.open(url)
+                Text(mapItem.name ?? "Unknown Place")
+                    .font(Font.custom("BPreplay-bold", size: 35))
+                    .foregroundColor(.white)
+                
+                Text(address)
+                    .multilineTextAlignment(.center)
+                    .font(Font.custom("BPreplay", size: 20))
+                    .foregroundColor(.white)
+                
+                if let phone = mapItem.phoneNumber {
+                    Text(phone)
+                        .font(Font.custom("BPreplay", size: 20))
+                        .foregroundColor(.white)
                 }
+                
+                if let url = mapItem.url {
+                    Link("Website", destination: url)
+                        .font(Font.custom("BPreplay", size: 20))
+                        .foregroundColor(.white)
+                }
+                
+                Button("Open in Maps") {
+                    let coordinate = placemark.coordinate
+                    let url = URL(string: "maps://?daddr=\(coordinate.latitude),\(coordinate.longitude)")
+                    
+                    if let url = url {
+                        UIApplication.shared.open(url)
+                        
+                    }
+                }
+                .font(Font.custom("BPreplay-bold", size: 23))
+                .frame(width: 170)
+                .padding()
+                .background(Color.teal2)
+                .foregroundColor(.white)
+                .cornerRadius(12)
+                .frame(maxWidth: .infinity)
+                //.font(Font.custom("BPreplay", size: 20))
+              //  .foregroundColor(.white)
+                Spacer()
             }
-            
-            Spacer()
+            .padding()
+            .background(Color("Teal").ignoresSafeArea())
         }
-        .padding()
     }
 }
-
 #Preview {
     let mockItem = MKMapItem(placemark: MKPlacemark(
         coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)

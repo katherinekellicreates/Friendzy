@@ -16,7 +16,7 @@ struct DebugIdeasView: View {
             
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("DASHBOARD (LIVE)")
+                Text("App Suggestions")
                     .font(.headline)
                 
                 Text("Suggestion count: \(appState.state.ideas.count)")

@@ -48,7 +48,7 @@ struct Results: View {
                     Button {
                         showingFilters = true
                     } label: {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
+                        Image(systemName: "line.3.horizontal.decrease")
                             .font(.system(size: 28))
                             .foregroundStyle(.white)
                     }
