@@ -130,70 +130,82 @@ struct Results: View {
         .sheet(isPresented: $showingFilters) {
             
             NavigationStack {
-                
-                VStack(spacing: 25) {
-                    
-                    Text("Filters")
-                        .font(Font.custom("BPreplay-Bold", size: 35))
-                    
-                    VStack(alignment: .leading, spacing: 10) {
+                ZStack {
+                    Color("Teal").ignoresSafeArea(.all)
+                    VStack(spacing: 25) {
                         
-                        Text("Price")
-                            .font(Font.custom("BPreplay", size: 22))
+                        Text("Filters")
+                            .font(Font.custom("BPreplay-Bold", size: 35))
+                            .foregroundStyle(.white)
                         
-                        Picker("Price", selection: $selectedPrice) {
+                        VStack(alignment: .leading, spacing: 10) {
                             
-                            Text("Any")
-                                .tag(nil as PriceLevel?)
-                            Text("Free")
-                                .tag(PriceLevel.free as PriceLevel?)
-                            Text("$")
-                                .tag(PriceLevel.low as PriceLevel?)
-                            Text("$$")
-                                .tag(PriceLevel.medium as PriceLevel?)
-                            Text("$$$")
-                                .tag(PriceLevel.high as PriceLevel?)
+                            Text("Price")
+                                .font(Font.custom("BPreplay-bold", size: 22))
+                                .foregroundStyle(.white)
+                            
+                            Picker("Price", selection: $selectedPrice) {
+                                
+                                Text("Any")
+                                    .tag(nil as PriceLevel?)
+                                Text("Free")
+                                    .tag(PriceLevel.free as PriceLevel?)
+                                Text("$")
+                                    .tag(PriceLevel.low as PriceLevel?)
+                                Text("$$")
+                                    .tag(PriceLevel.medium as PriceLevel?)
+                                Text("$$$")
+                                    .tag(PriceLevel.high as PriceLevel?)
+                                
+                            }
+                            .pickerStyle(.segmented)
                         }
-                        .pickerStyle(.segmented)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
                         
-                        Text("Energy")
-                            .font(Font.custom("BPreplay", size: 22))
-                        
-                        Picker("Energy", selection: $selectedEnergy) {
-                            Text("Any")
-                                .tag(nil as EnergyLevel?)
-                            Text("⚡️")
-                                .tag(EnergyLevel.lowest as EnergyLevel?)
-                            Text("⚡️⚡️")
-                                .tag(EnergyLevel.low as EnergyLevel?)
-                            Text("⚡️⚡️⚡️")
-                                .tag(EnergyLevel.medium as EnergyLevel?)
-                            Text("⚡️⚡️⚡️⚡️")
-                                .tag(EnergyLevel.high as EnergyLevel?)
+                        VStack(alignment: .leading, spacing: 10) {
+                            
+                            Text("Energy")
+                                .font(Font.custom("BPreplay", size: 22))
+                                .foregroundStyle(.white)
+                            
+                            Picker("Energy", selection: $selectedEnergy) {
+                                Text("Any")
+                                    .tag(nil as EnergyLevel?)
+                                Text("⚡️")
+                                    .tag(EnergyLevel.lowest as EnergyLevel?)
+                                Text("⚡️⚡️")
+                                    .tag(EnergyLevel.low as EnergyLevel?)
+                                Text("⚡️⚡️⚡️")
+                                
+                                    .tag(EnergyLevel.medium as EnergyLevel?)
+                                Text("⚡️⚡️⚡️⚡️")
+                                    .tag(EnergyLevel.high as EnergyLevel?)
+                            }
+                            .pickerStyle(.segmented)
                         }
-                        .pickerStyle(.segmented)
-                    }
-                    
-                    Toggle("🧠 Focus Activities Only", isOn: $focusOnly)
-                        .font(Font.custom("BPreplay", size: 20))
-                    
-                    Button("Clear Filters") {
+                        Toggle("🧠 Focus Activities Only", isOn: $focusOnly)
+                            .font(Font.custom("BPreplay", size: 20))
+                            .foregroundStyle(.white)
+                            .tint(.switch)
                         
-                        selectedPrice = nil
-                        selectedEnergy = nil
-                        focusOnly = false
+                        
+                        
+                        Button("Clear Filters") {
+                            
+                            selectedPrice = nil
+                            selectedEnergy = nil
+                            focusOnly = false
+                        }
+                        .frame(width: 150)
+                        .font(Font.custom("BPreplay-bold", size: 22))
+                        .padding()
+                        .background(Color("OurYellow"))
+                        .foregroundStyle(.teal)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        
+                        Spacer()
                     }
-                    .font(Font.custom("BPreplay-Bold", size: 22))
                     .padding()
-                    .background(Color.teal2.opacity(0.2))
-                    .cornerRadius(12)
-                    
-                    Spacer()
                 }
-                .padding()
             }
         }
     }

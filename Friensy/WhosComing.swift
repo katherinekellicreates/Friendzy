@@ -23,7 +23,7 @@ struct WhosComing: View {
                             .foregroundStyle(.white)
                         
                         HStack {
-                            Text("Attendees")
+                            Text("Friends")
                                 .font(Font.custom("BPreplay", size: 20))
                                 .foregroundStyle(.white)
                             Picker("", selection: $appState.state.number) {
