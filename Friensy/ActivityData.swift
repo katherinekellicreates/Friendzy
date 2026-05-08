@@ -151,7 +151,7 @@ struct ActivityData {
         ),
         
         Activity(
-            name: "Create a pinterest board together",
+            name: "Shared Pinterest board",
             minPeople: 2,
             isDate: false,
             locationRequirement: .indoor,
