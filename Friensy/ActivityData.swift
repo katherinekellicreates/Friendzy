@@ -354,6 +354,71 @@ struct ActivityData {
         ),
         
         Activity(
+            name: "Sledding",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.social, .active],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter]
+        ),
+        
+        Activity(
+            name: "Skiing",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.social, .active,.sports],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter]
+        ),
+       
+        Activity(
+            name: "Build a snowman",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.social, .fun,],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter]
+        ),
+        
+        Activity(
+            name: "Snowboarding",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.social, .active,.sports],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter]
+        ),
+        
+        Activity(
+            name: "Snowball fight",
+            minPeople: 2,
+            isDate: true,
+            locationRequirement: .outdoor,
+            goOut: true,
+            types: [.social, .active],
+            energyLevel: .high,
+            priceLevel: .medium,
+            requiresFocus: false,
+            seasons: [.winter]
+        ),
+        
+        Activity(
             name: "Festival",
             minPeople: 2,
             isDate: true,
