@@ -87,28 +87,6 @@ struct Where: View {
                         }
                     }
                     
-                    VStack(spacing: 8) {
-                        Text("Radius")
-                            .font(.custom("BPreplay-bold", size: 20))
-                            .foregroundStyle(.white)
-
-                        Picker("Radius", selection: $radius) {
-                            Text("2 mi").tag(2.0)
-                            Text("5 mi").tag(5.0)
-                            Text("10 mi").tag(10.0)
-                            Text("15 mi").tag(15.0)
-                            Text("20 mi").tag(20.0)
-                            Text("25+ mi").tag(25.0)
-                        }
-                        .pickerStyle(.segmented)
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(height: 45)
-                        .padding(.horizontal, 25)
-
-                    }
-                    .padding()
-                    
-                    let radiusInMeters = radius * 1609.34
                     
                     Group {
                         if let location = locationManager.userLocation {
@@ -117,11 +95,6 @@ struct Where: View {
                             Map(position: $startPosition) {
                                 UserAnnotation()
                                 
-                                MapCircle(
-                                    center: location,
-                                    radius: radius * 1609.34
-                                )
-                                .foregroundStyle(.ourYellow.opacity(0.45))
                             }
                             .onAppear {
                                 updateCamera()

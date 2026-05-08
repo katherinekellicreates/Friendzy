@@ -145,16 +145,12 @@ struct Results: View {
                             
                             Text("Any")
                                 .tag(nil as PriceLevel?)
-                            
                             Text("Free")
                                 .tag(PriceLevel.free as PriceLevel?)
-                            
                             Text("$")
                                 .tag(PriceLevel.low as PriceLevel?)
-                            
                             Text("$$")
                                 .tag(PriceLevel.medium as PriceLevel?)
-                            
                             Text("$$$")
                                 .tag(PriceLevel.high as PriceLevel?)
                         }
@@ -167,19 +163,14 @@ struct Results: View {
                             .font(Font.custom("BPreplay", size: 22))
                         
                         Picker("Energy", selection: $selectedEnergy) {
-                            
                             Text("Any")
                                 .tag(nil as EnergyLevel?)
-                            
                             Text("⚡️")
                                 .tag(EnergyLevel.lowest as EnergyLevel?)
-                            
                             Text("⚡️⚡️")
                                 .tag(EnergyLevel.low as EnergyLevel?)
-                            
                             Text("⚡️⚡️⚡️")
                                 .tag(EnergyLevel.medium as EnergyLevel?)
-                            
                             Text("⚡️⚡️⚡️⚡️")
                                 .tag(EnergyLevel.high as EnergyLevel?)
                         }
