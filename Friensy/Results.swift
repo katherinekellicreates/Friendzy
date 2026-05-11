@@ -135,14 +135,15 @@ struct Results: View {
                     VStack(spacing: 25) {
                         
                         Text("Filters")
-                            .font(Font.custom("BPreplay-Bold", size: 35))
+                            .font(Font.custom("BPreplay-Bold", size: 40))
                             .foregroundStyle(.white)
                         
                         VStack(alignment: .leading, spacing: 10) {
                             
                             Text("Price")
-                                .font(Font.custom("BPreplay-bold", size: 22))
+                                .font(Font.custom("BPreplay-bold", size: 29))
                                 .foregroundStyle(.white)
+                                .frame(maxWidth: .infinity, alignment: .center)
                             
                             Picker("Price", selection: $selectedPrice) {
                                 
@@ -163,26 +164,25 @@ struct Results: View {
                         
                         VStack(alignment: .leading, spacing: 10) {
                             
-                            Text("Energy")
-                                .font(Font.custom("BPreplay", size: 22))
-                                .foregroundStyle(.white)
                             
-                            Picker("Energy", selection: $selectedEnergy) {
-                                Text("Any")
-                                    .tag(nil as EnergyLevel?)
-                                Text("⚡️")
-                                    .tag(EnergyLevel.lowest as EnergyLevel?)
-                                Text("⚡️⚡️")
-                                    .tag(EnergyLevel.low as EnergyLevel?)
-                                Text("⚡️⚡️⚡️")
-                                    .tag(EnergyLevel.medium as EnergyLevel?)
-                                Text("⚡️⚡️⚡️⚡️")
-                                    .tag(EnergyLevel.high as EnergyLevel?)
+                            HStack {
+                                Text("Energy ⚡️")
+                                    .font(Font.custom("BPreplay-bold", size: 29))
+                                    .foregroundStyle(.white)
+                                Picker("Energy", selection: $selectedEnergy) {
+                                    Text("Any").tag(nil as EnergyLevel?)
+                                    Text("⚡️").tag(EnergyLevel.lowest as EnergyLevel?)
+                                    Text("⚡️⚡️").tag(EnergyLevel.low as EnergyLevel?)
+                                    Text("⚡️⚡️⚡️").tag(EnergyLevel.medium as EnergyLevel?)
+                                    Text("⚡️⚡️⚡️⚡️").tag(EnergyLevel.high as EnergyLevel?)
+                                }
+                                .pickerStyle(.menu)
+                                .tint(.white)
                             }
-                            .pickerStyle(.segmented)
+                            .padding()
                         }
                         Toggle("🧠 Focus Activities Only", isOn: $focusOnly)
-                            .font(Font.custom("BPreplay", size: 20))
+                            .font(Font.custom("BPreplay-bold", size: 25))
                             .foregroundStyle(.white)
                             .tint(.switch)
                         
