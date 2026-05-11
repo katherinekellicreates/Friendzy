@@ -17,8 +17,8 @@ struct FriensyApp: App {
         
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("OurYellow"))
         
-       // UISegmentedControl.appearance().backgroundColor =
-        //UIColor(Color("Teal").opacity(0.3))
+        UISegmentedControl.appearance().backgroundColor =
+        UIColor(Color("Teal").opacity(0.3))
         
         UISegmentedControl.appearance().setTitleTextAttributes([
             .font: normalFont,
