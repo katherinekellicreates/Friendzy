@@ -316,28 +316,93 @@ struct ActivityDetailView: View {
         func searchQueriesForActivity() -> [String] {
             switch activity.name {
             case "Escape room":
-                return ["escape room", "puzzle room"]
+                return ["escape room", "puzzle room", "escape game",]
+            case "Roller Skating":
+                return ["Rink", "roller skating rink", "roller skating",]
+            case "Ice Skating":
+                return ["Rink", "skating rink", "ice skating",]
             case "Bowling":
                 return ["bowling alley", "bowling", "lanes"]
             case "Arcade":
                 return ["arcade", "game center"]
             case "Mini golf":
-                return ["mini golf"]
+                return ["mini golf", "golf course", "miniature golf"]
+            case "Picnic":
+                return ["Park"]
+            case "Zoo":
+                return ["Zoo"]
+            case "Beach Day":
+                return ["Beach"]
+            case "Restaurant":
+                return ["Restaurant", "dining"]
+            case "Workout":
+                return ["Gym", "fitness center"]
+            case "Concert":
+                return ["Stadiums", "arena", "concert venue", "concert hall"]
+            case "See a live-action show":
+                return ["Theatre", "theater", "playhouse","Auditorium","Medieval times","improv"]
+            case "Murder mystery dinner":
+                return ["Murder mystery dinner", "Murder Mystery"]
+            case "Museum":
+                return ["Museum", "art museum"]
+            case "Drive-in Movie":
+                return ["Drive-in movie", "drive-in"]
+            case "Stargazing":
+                return ["Park"]
+            case "Rooftop Dinner":
+                return ["rooftop restaurant", "rooftop bar","rooftop"]
+            case "Watch the sunset":
+                return ["park"]
+            case "Pottery":
+                return ["Ceriamics", "Pottery","color me mine","Clay Monet"]
+            case "Painting":
+                return ["color me mine","Pinot's Palette","Clay Monet"]
+            case "Learn a new skill":
+                return ["Art Classes", "cooking class", ]
+            case "Rock Climbing":
+                return ["Rock Climbing", "rock climbing gym","climbing gym"]
+            case "Haunted House":
+                return ["Haunted House"]
+            case "Apple Picking":
+                return ["apple picking", "apple orchard"]
+            case "Corn Maze":
+                return ["Corn maze", "corn mazes"]
+            case "Pumpkin Patch":
+                return ["Pumpkin Patch", "fall festival","Goberts"]
+            case "Record Store":
+                return ["Record Store", "record shop","vinyl store","vinyl record store"]
+            case "Opera House":
+                return ["Opera House", "opera house", "opera"]
+            case "Water Park":
+                return ["Water Park","Great Wolf Lodge"]
+            case "Festival":
+                return ["Festival", "festival venue", "festival hall"]
+            case "Shopping":
+                return ["Shopping", "mall", "outlet", "department store", "department stores", "outlet mall", "outlet stores", "outlet", "outlet center"]
+            case "Trampoline Park":
+                return ["Trampoline Park","Jump Park","urban air","sky zone",]
+            case "Laser Tag":
+                return ["Laser Tag", "laser tag arena", "main event","battle house"]
             case "Amusement Park":
-                return ["amusement park", "theme park"]
+                return ["amusement park", "theme park","fair","six flags","disneyland","disney world","universal studios","state fair","roller coaster"]
+            case "Nature Walk":
+                return ["Nature", "forest", "park","preserve","nature preserve","trail"]
             case "Hiking":
                 return ["hiking trail", "nature preserve"]
             case "Thrifting":
-                return ["thrift", "thrifting", "thrift store", "Goodwill", "Salvation Army", "House of Hope"]
+                return ["thrift", "thrifting", "thrift store", "Goodwill", "Salvation Army", "House of Hope","Savers","Platos Closet"]
             case "Go To a Sports Game":
                 return ["sports", "stadium", "arena"]
-            case "Bookstore Shopping":
+            case "Book Shopping":
                 return ["bookstore", "bookshop", "Barnes & Noble", "book store", "book shop", "book"]
             case "Coffee Run":
                 return ["coffee", "Starbucks", "Dunkin Donuts", "coffee shop", "cafe"]
 // TEMPLATE!
 //            case "EXACT Activity Name":
 //                return ["EXACT Activity Name", "another search term", "another search term", "etc", "add as many search terms as need be!"]
+                
+//            case "":
+//                return [""]
             default:
                 return [activity.name]
             }

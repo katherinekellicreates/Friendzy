@@ -175,7 +175,6 @@ struct Results: View {
                                 Text("⚡️⚡️")
                                     .tag(EnergyLevel.low as EnergyLevel?)
                                 Text("⚡️⚡️⚡️")
-                                
                                     .tag(EnergyLevel.medium as EnergyLevel?)
                                 Text("⚡️⚡️⚡️⚡️")
                                     .tag(EnergyLevel.high as EnergyLevel?)
