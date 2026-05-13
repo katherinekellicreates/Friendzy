@@ -57,7 +57,7 @@ struct Results: View {
                 .padding(.top)
                 Text("Your Ideas:")
                     .foregroundStyle(.white)
-                    .font(Font.custom("BPreplay", size: 35))
+                    .font(Font.custom("BPreplay-bold", size: 35))
                 
                 if !ideas.isEmpty {
                     Text(
@@ -66,7 +66,7 @@ struct Results: View {
                         :"\(ideas.count) ways to spend your day!"
                     )
                     .foregroundStyle(.white.opacity(0.8))
-                    .font(Font.custom("BPreplay", size: 20))
+                    .font(Font.custom("BPreplay", size: 23))
                 }
                 
                 if ideas.isEmpty {
@@ -141,7 +141,7 @@ struct Results: View {
                         VStack(alignment: .leading, spacing: 10) {
                             
                             Text("Price")
-                                .font(Font.custom("BPreplay-bold", size: 29))
+                                .font(Font.custom("BPreplay", size: 29))
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity, alignment: .center)
                             
@@ -164,10 +164,18 @@ struct Results: View {
                         
                         VStack(alignment: .leading, spacing: 10) {
                             
+                            Spacer()
+                                .frame(height: 5)
+                            Toggle("Focus Activities Only 🧠", isOn: $focusOnly)
+                                .font(Font.custom("BPreplay", size: 25))
+                                .foregroundStyle(.white)
+                                .tint(.switch)
+                            Spacer()
+                                .frame(height: 5)
                             
                             HStack {
                                 Text("Energy ⚡️")
-                                    .font(Font.custom("BPreplay-bold", size: 29))
+                                    .font(Font.custom("BPreplay", size: 29))
                                     .foregroundStyle(.white)
                                 Picker("Energy", selection: $selectedEnergy) {
                                     Text("Any").tag(nil as EnergyLevel?)
@@ -178,14 +186,10 @@ struct Results: View {
                                 }
                                 .pickerStyle(.menu)
                                 .tint(.white)
+                                Spacer()
+                                    .frame(height: 5)
                             }
-                            .padding()
                         }
-                        Toggle("🧠 Focus Activities Only", isOn: $focusOnly)
-                            .font(Font.custom("BPreplay-bold", size: 25))
-                            .foregroundStyle(.white)
-                            .tint(.switch)
-                        
                         
                         
                         Button("Clear Filters") {
