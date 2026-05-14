@@ -548,7 +548,7 @@ struct ActivityData {
             name: "Picnic",
             minPeople: 2,
             isDate: true,
-            locationRequirement: .indoor,
+            locationRequirement: .outdoor,
             goOut: true,
             types: [.food, .social,.scenic,.romantic],
             energyLevel: .medium,
