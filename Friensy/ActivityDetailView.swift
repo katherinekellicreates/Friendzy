@@ -378,7 +378,7 @@ struct ActivityDetailView: View {
             case "Festival":
                 return ["Festival", "festival venue", "festival hall"]
             case "Shopping":
-                return ["Shopping", "mall", "outlet", "department store", "department stores", "outlet mall", "outlet stores", "outlet", "outlet center"]
+                return ["Apple Store", "Shopping", "mall", "outlet", "department store", "department stores", "outlet mall", "outlet stores", "outlet", "outlet center"]
             case "Trampoline Park":
                 return ["Trampoline Park","Jump Park","urban air","sky zone",]
             case "Laser Tag":
@@ -397,6 +397,8 @@ struct ActivityDetailView: View {
                 return ["bookstore", "bookshop", "Barnes & Noble", "book store", "book shop", "book"]
             case "Coffee Run":
                 return ["coffee", "Starbucks", "Dunkin Donuts", "coffee shop", "cafe"]
+            case "Go Downtown":
+                return ["Train station", "Train"]
 // TEMPLATE!
 //            case "EXACT Activity Name":
 //                return ["EXACT Activity Name", "another search term", "another search term", "etc", "add as many search terms as need be!"]

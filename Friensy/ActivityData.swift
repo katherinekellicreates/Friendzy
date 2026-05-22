@@ -806,7 +806,7 @@ struct ActivityData {
         
         Activity(
             name: "Go Downtown",
-            minPeople: 2,
+            minPeople: 1,
             isDate: true,
             locationRequirement: .outdoor,
             goOut: true,
@@ -1154,7 +1154,7 @@ struct ActivityData {
         ),
         Activity(
             name: "Shopping",
-            minPeople: 2,
+            minPeople: 1,
             isDate: false,
             locationRequirement: .indoor,
             goOut: true,
